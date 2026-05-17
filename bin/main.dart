@@ -2,11 +2,13 @@ import 'dart:io';
 
 import 'lib/infrastructure/store/leitor.dart';
 import 'lib/infrastructure/store/impl/csv_leitor.dart';
+import 'lib/domain/usecase/impl/temperatura_usecase.dart';
 import 'temperatura.dart';
 
 void main(List<String> arguments) async {
   Leitor leitor = LeitorCSV("./bin/Clima/Sensores/");
-  Temperatura temp = Temperatura(leitor: leitor);
+  final temperaturaUseCase = TemperaturaUseCaseImpl(leitor: leitor);
+  Temperatura temp = Temperatura(leitor: leitor, useCase: temperaturaUseCase);
   print(" 1 – TEMPERATURA");
   print(" 2 – UMIDADE");
   print(" 3 – DIREÇÃO DO VENTO");
