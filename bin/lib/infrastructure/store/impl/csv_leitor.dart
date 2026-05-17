@@ -55,7 +55,6 @@ class LeitorCSV implements Leitor {
   @override
   Future<List<File?>> getByYear(
     String siglaEstado,
-    String _,
     String ano,
   ) async {
     final arquivos = await getByState(siglaEstado);

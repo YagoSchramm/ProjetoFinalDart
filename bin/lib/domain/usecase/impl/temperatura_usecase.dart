@@ -77,10 +77,9 @@ class TemperaturaUseCaseImpl implements TemperaturaUseCase {
 
     return _media(valores);
   }
-
   // função que pega todos os valores de temperatura de todos os arquivos do determinado ano
   Future<List<double>> _valoresPorAno(String siglaEstado, String ano) async {
-    final arquivos = await _leitor.getByYear(siglaEstado, '', ano);
+    final arquivos = await _leitor.getByYear(siglaEstado, ano);
     final valores = <double>[];
 
     for (final arquivo in arquivos) {
@@ -107,7 +106,6 @@ class TemperaturaUseCaseImpl implements TemperaturaUseCase {
 
     return _lerValores(arquivo);
   }
-
   // função para ler as temperaturas do arquivo e se necessário as horas 
   Future<List<double>> _lerValores(File arquivo, {String? hora}) async {
     final conteudo = await arquivo.readAsString();
