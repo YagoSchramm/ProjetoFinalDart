@@ -1,4 +1,4 @@
-import 'lib/leitor.dart';
+import 'lib/infrastructure/store/leitor.dart';
 import 'package:yaansi/yaansi.dart';
 
 class Temperatura {
@@ -11,7 +11,7 @@ class Temperatura {
     String siglaEstado,
   ) async {
     List<String> temperaturas = [];
-    final filtrado = await _leitor.filtrarMesEstado(siglaEstado, mes, ano);
+    final filtrado = await _leitor.getByMonth(siglaEstado, mes, ano);
     if (filtrado == null) {
       print(filtrado);
       throw Exception("Erro ao filtrar arquivo");
