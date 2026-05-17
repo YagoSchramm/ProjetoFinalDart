@@ -61,7 +61,7 @@ class DirecaoVentoUsecaseImpl implements DirecaoVentoUseCase {
     return _lerValores(arquivo);
   }
 
-  Future<List<double>> _lerValores(File arquivo, {String? hora}) async {
+  Future<List<double>> _lerValores(File arquivo) async {
     final conteudo = await arquivo.readAsString();
     final linhas = conteudo.split('\n');
     if (linhas.isEmpty) {
