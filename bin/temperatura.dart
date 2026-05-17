@@ -39,31 +39,64 @@ class Temperatura {
     return somaTemperatura / (linhas.length);
   }
 
+  Future<double> _getMediaAno(String ano, String medida, String siglaEstado) async{
+     List<String> temperaturas = [];
+    double somaTemperatura=0;
+   for (var i = 1; i < 12; i++) {
+    final mes= i.toString().padLeft(2,"0");
+    final mediaMes=await _getMediaMes(mes, ano, medida, siglaEstado);
+    somaTemperatura+=mediaMes;
+    }
+    return somaTemperatura / (temperaturas.length);
+  }
+  Future<void> informacoesAnos(String siglaEstado) async {
+     final mediaC = await _getMediaAno(
+        "2024",
+        "temperatura_celsius",
+        siglaEstado,
+      );
+      print(mediaC.toStringAsFixed(2).red);
+      final mediaF = await _getMediaAno(
+        "2025",
+        "temperatura_fahrenheit",
+        siglaEstado,
+      );
+      print(mediaF.toStringAsFixed(2).yellow);
+      final mediaK = await _getMediaAno(
+        "2026",
+        "temperatura_kelvin",
+        siglaEstado,
+      );
+      print(mediaK.toStringAsFixed(2).blue);
+  }
+
   Future<void> informacoesPorAno(String ano, String siglaEstado) async {
-   for (var i = 1; i <= 12; i++) {
-    final mes=i.toString().padLeft(2,"0");
-    print("\nMedia de temperatuas do estado $siglaEstado do mês $mes de $ano :");
-    final mediaC = await _getMediaMes(
-      mes,
-      ano,
-      "temperatura_celsius",
-      siglaEstado,
-    );
-    print(mediaC.toStringAsFixed(2).red);
-    final mediaF = await _getMediaMes(
-      mes,
-      ano,
-      "temperatura_fahrenheit",
-      siglaEstado,
-    );
-    print(mediaF.toStringAsFixed(2).yellow);
-    final mediaK = await _getMediaMes(
-      mes,
-      ano,
-      "temperatura_kelvin",
-      siglaEstado,
-    );
-    print(mediaK.toStringAsFixed(2).blue);
-  }  
-   }
+    for (var i = 1; i <= 12; i++) {
+      final mes = i.toString().padLeft(2, "0");
+      print(
+        "\nMedia de temperatuas do estado $siglaEstado do mês $mes de $ano :",
+      );
+      final mediaC = await _getMediaMes(
+        mes,
+        ano,
+        "temperatura_celsius",
+        siglaEstado,
+      );
+      print(mediaC.toStringAsFixed(2).red);
+      final mediaF = await _getMediaMes(
+        mes,
+        ano,
+        "temperatura_fahrenheit",
+        siglaEstado,
+      );
+      print(mediaF.toStringAsFixed(2).yellow);
+      final mediaK = await _getMediaMes(
+        mes,
+        ano,
+        "temperatura_kelvin",
+        siglaEstado,
+      );
+      print(mediaK.toStringAsFixed(2).blue);
+    }
+  }
 }
