@@ -1,4 +1,4 @@
-abstract interface class VelocidadeVentoUseCase {
+abstract interface class UmidadeArUseCase {
   Future<double> mediaPorEstadoPorAno(String siglaEstado, String ano);
 
   Future<double> mediaPorEstadoPorMes(

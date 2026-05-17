@@ -1,36 +1,19 @@
 import 'dart:io';
 
-import '../velocidade_vento.dart';
 import '../../../infrastructure/store/leitor.dart';
+import '../umidade.dart';
 
-class VelocidadeVentoUsecaseImpl implements VelocidadeVentoUseCase {
+class UmidadeArUseCaseImpl implements UmidadeArUseCase {
+  String _colunaUmidade= "umidade_ar_%";
+
   final Leitor _leitor;
-  static const String _colunaVelocidadeVento = 'direcao_vento_ms';
-  VelocidadeVentoUsecaseImpl({required Leitor leitor}) : _leitor = leitor;
 
-  @override
-  Future<double> maximaPorEstadoPorAno(String siglaEstado, String ano) async {
-    final valores = await _valoresPorAno(siglaEstado, ano);
-    final maxima = _maxima(valores);
-    return maxima;
-  }
-
-  @override
-  Future<double> maximaPorEstadoPorMes(
-    String siglaEstado,
-    String mes,
-    String ano,
-  ) async {
-    final valores = await _valoresPorMes(siglaEstado, mes, ano);
-    final maxima = _maxima(valores);
-    return maxima;
-  }
+  UmidadeArUseCaseImpl({required Leitor leitor}) : _leitor = leitor;
 
   @override
   Future<double> mediaPorEstadoPorAno(String siglaEstado, String ano) async {
     final valores = await _valoresPorAno(siglaEstado, ano);
-    final media = _media(valores);
-    return media;
+    return _media(valores);
   }
 
   @override
@@ -40,15 +23,29 @@ class VelocidadeVentoUsecaseImpl implements VelocidadeVentoUseCase {
     String ano,
   ) async {
     final valores = await _valoresPorMes(siglaEstado, mes, ano);
-    final media = _media(valores);
-    return media;
+    return _media(valores);
+  }
+
+  @override
+  Future<double> maximaPorEstadoPorAno(String siglaEstado, String ano) async {
+    final valores = await _valoresPorAno(siglaEstado, ano);
+    return _maxima(valores);
+  }
+
+  @override
+  Future<double> maximaPorEstadoPorMes(
+    String siglaEstado,
+    String mes,
+    String ano,
+  ) async {
+    final valores = await _valoresPorMes(siglaEstado, mes, ano);
+    return _maxima(valores);
   }
 
   @override
   Future<double> minimaPorEstadoPorAno(String siglaEstado, String ano) async {
     final valores = await _valoresPorAno(siglaEstado, ano);
-    final minima = _minima(valores);
-    return minima;
+    return _minima(valores);
   }
 
   @override
@@ -58,19 +55,21 @@ class VelocidadeVentoUsecaseImpl implements VelocidadeVentoUseCase {
     String ano,
   ) async {
     final valores = await _valoresPorMes(siglaEstado, mes, ano);
-    final minima = _minima(valores);
-    return minima;
+    return _minima(valores);
   }
 
   Future<List<double>> _valoresPorAno(String siglaEstado, String ano) async {
     final arquivos = await _leitor.getByYear(siglaEstado, ano);
     final valores = <double>[];
-    for (var arquivo in arquivos) {
+
+    for (final arquivo in arquivos) {
       if (arquivo == null) {
         continue;
       }
+
       valores.addAll(await _lerValores(arquivo));
     }
+
     return valores;
   }
 
@@ -89,35 +88,40 @@ class VelocidadeVentoUsecaseImpl implements VelocidadeVentoUseCase {
 
   Future<List<double>> _lerValores(File arquivo) async {
     final conteudo = await arquivo.readAsString();
-    final linhas = conteudo.split("\n");
+    final linhas = conteudo.split('\n');
     if (linhas.isEmpty) {
       return <double>[];
     }
 
-    final colunas = linhas.first.trim().split(",");
-    final indiceVelocidade = colunas.indexOf(_colunaVelocidadeVento);
-    if (indiceVelocidade == -1) {
-      throw Exception('Erro ao encontrar coluna $_colunaVelocidadeVento');
+    final colunas = linhas.first.trim().split(',');
+    final indiceUmidade = colunas.indexOf(_colunaUmidade);
+    if (indiceUmidade == -1) {
+      throw Exception(
+        'Erro ao encontrar coluna de umidade do ar. Colunas aceitas: ${_colunaUmidade}',
+      );
     }
+
     final valores = <double>[];
-    for (var i = 0; i < linhas.length; i++) {
+    for (var i = 1; i < linhas.length; i++) {
       final linha = linhas[i].trim();
       if (linha.isEmpty) {
         continue;
       }
 
       final campos = linha.split(',');
-      if (campos.length <= indiceVelocidade) {
+      if (campos.length <= indiceUmidade) {
         continue;
       }
 
-      valores.add(double.parse(campos[indiceVelocidade]));
+      valores.add(double.parse(campos[indiceUmidade]));
     }
+
     return valores;
   }
 
-  // Função que retorna a velocidade do vento média entre os valores da lista
   double _media(List<double> valores) {
+    _validarValores(valores);
+
     var soma = 0.0;
     for (final valor in valores) {
       soma += valor;
@@ -126,8 +130,9 @@ class VelocidadeVentoUsecaseImpl implements VelocidadeVentoUseCase {
     return soma / valores.length;
   }
 
-  // Função que retorna a velocidade máxima do vento entre os valores da lista
   double _maxima(List<double> valores) {
+    _validarValores(valores);
+
     var maxima = valores.first;
     for (var i = 1; i < valores.length; i++) {
       if (valores[i] > maxima) {
@@ -138,8 +143,9 @@ class VelocidadeVentoUsecaseImpl implements VelocidadeVentoUseCase {
     return maxima;
   }
 
-  // Função que retorna a velocidade mínima do vento entre os valores da lista
   double _minima(List<double> valores) {
+    _validarValores(valores);
+
     var minima = valores.first;
     for (var i = 1; i < valores.length; i++) {
       if (valores[i] < minima) {
@@ -148,5 +154,11 @@ class VelocidadeVentoUsecaseImpl implements VelocidadeVentoUseCase {
     }
 
     return minima;
+  }
+
+  void _validarValores(List<double> valores) {
+    if (valores.isEmpty) {
+      throw Exception('Nenhum valor de umidade do ar encontrado');
+    }
   }
 }

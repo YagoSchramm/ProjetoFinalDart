@@ -1,71 +1,61 @@
 import 'package:yaansi/yaansi.dart';
-import './lib/domain/usecase/temperatura.dart';
 
-class Temperatura {
-  final TemperaturaUseCase useCase;
+import 'lib/domain/usecase/umidade.dart';
+import 'lib/infrastructure/store/leitor.dart';
 
-  Temperatura({required this.useCase});
+class UmidadeAr {
+  final UmidadeArUseCase useCase;
+
+  UmidadeAr({required this.useCase});
 
   Future<void> informacoesMediaAno(String siglaEstado, String ano) async {
-    print("\nMedia de temperatuas do estado $siglaEstado no ano $ano :");
-    final mediaC = await useCase.mediaPorEstadoPorAno(siglaEstado, ano);
-    _imprimirTemperaturas(mediaC);
+    print("\nMedia de umidade do ar no estado $siglaEstado no ano $ano:");
+    final media = await useCase.mediaPorEstadoPorAno(siglaEstado, ano);
+     print("${media.toStringAsFixed(2)}%".green);
   }
 
   Future<void> informacoesMediaMesAno(String ano, String siglaEstado) async {
     for (var i = 1; i <= 12; i++) {
       final mes = i.toString().padLeft(2, "0");
       print(
-        "\nMedia de temperatuas do estado $siglaEstado do mes $mes de $ano :",
+        "\nMedia de umidade do ar no estado $siglaEstado do mes $mes de $ano:",
       );
-      final mediaC = await useCase.mediaPorEstadoPorMes(siglaEstado, mes, ano);
-      _imprimirTemperaturas(mediaC);
+      final media = await useCase.mediaPorEstadoPorMes(siglaEstado, mes, ano);
+       print("${media.toStringAsFixed(2)}%".green);
     }
   }
 
   Future<void> informacoesMinimaAno(String siglaEstado, String ano) async {
-    print("\nMinima de temperatuas do estado $siglaEstado no ano $ano :");
-    final minimaC = await useCase.minimaPorEstadoPorAno(siglaEstado, ano);
-    _imprimirTemperaturas(minimaC);
+    print("\nMinima de umidade do ar no estado $siglaEstado no ano $ano:");
+    final minima = await useCase.minimaPorEstadoPorAno(siglaEstado, ano);
+     print("${minima.toStringAsFixed(2)}%".blue);
   }
 
   Future<void> informacoesMinimaMesAno(String ano, String siglaEstado) async {
     for (var i = 1; i <= 12; i++) {
       final mes = i.toString().padLeft(2, "0");
       print(
-        "\nMinima de temperatuas do estado $siglaEstado do mes $mes de $ano :",
+        "\nMinima de umidade do ar no estado $siglaEstado do mes $mes de $ano:",
       );
-      final minimaC = await useCase.minimaPorEstadoPorMes(siglaEstado, mes, ano);
-      _imprimirTemperaturas(minimaC);
+      final minima = await useCase.minimaPorEstadoPorMes(siglaEstado, mes, ano);
+       print("${minima.toStringAsFixed(2)}%".blue);
     }
   }
 
   Future<void> informacoesMaximaAno(String siglaEstado, String ano) async {
-    print("\nMaxima de temperatuas do estado $siglaEstado no ano $ano :");
-    final maximaC = await useCase.maximaPorEstadoPorAno(siglaEstado, ano);
-    _imprimirTemperaturas(maximaC);
+    print("\nMaxima de umidade do ar no estado $siglaEstado no ano $ano:");
+    final maxima = await useCase.maximaPorEstadoPorAno(siglaEstado, ano);
+     print("${maxima.toStringAsFixed(2)}%".red);
   }
 
   Future<void> informacoesMaximaMesAno(String ano, String siglaEstado) async {
     for (var i = 1; i <= 12; i++) {
       final mes = i.toString().padLeft(2, "0");
       print(
-        "\nMaxima de temperatuas do estado $siglaEstado do mes $mes de $ano :",
+        "\nMaxima de umidade do ar no estado $siglaEstado do mes $mes de $ano:",
       );
-      final maximaC = await useCase.maximaPorEstadoPorMes(siglaEstado, mes, ano);
-      _imprimirTemperaturas(maximaC);
-    }
-  }
-
-  Future<void> informacoesHoras(String siglaEstado) async {
-    print("\nMedia de temperatuas do estado $siglaEstado por hora:");
-
-    for (var i = 0; i < 24; i += 3) {
-      final hora = "${i.toString().padLeft(2, "0")}:00:00";
-      print("\nHorario $hora:");
-
-      final mediaC = await useCase.mediaPorHorarioPorEstado(siglaEstado, hora);
-      _imprimirTemperaturas(mediaC);
+      final maxima = await useCase.maximaPorEstadoPorMes(siglaEstado, mes, ano);
+       print("${maxima.toStringAsFixed(2)}%".red);
     }
   }
 
@@ -106,15 +96,5 @@ class Temperatura {
     await informacoesMinimaMesAno("2024", "SP");
     await informacoesMinimaMesAno("2025", "SP");
     await informacoesMinimaMesAno("2026", "SP");
-    await informacoesHoras("SC");
-    await informacoesHoras("SP");
-  }
-
-  void _imprimirTemperaturas(double temperaturaCelsius) {
-    print(temperaturaCelsius.toStringAsFixed(2).red);
-    final temperaturaFahrenheit = temperaturaCelsius * 9 / 5 + 32;
-    print(temperaturaFahrenheit.toStringAsFixed(2).yellow);
-    final temperaturaKelvin = temperaturaCelsius + 273.15;
-    print(temperaturaKelvin.toStringAsFixed(2).blue);
   }
 }

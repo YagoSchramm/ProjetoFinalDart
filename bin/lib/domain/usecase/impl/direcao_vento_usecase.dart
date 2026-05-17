@@ -94,6 +94,10 @@ class DirecaoVentoUsecaseImpl implements DirecaoVentoUseCase {
   }
 
   double _maisFrequente(List<double> valores) {
+    if (valores.isEmpty) {
+      throw Exception('Nenhum valor de direcao do vento encontrado');
+    }
+
     Map<double, int> contagem = {};
     for (double numero in valores) {
       contagem[numero] = (contagem[numero] ?? 0) + 1;
