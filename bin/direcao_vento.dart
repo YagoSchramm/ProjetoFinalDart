@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:yaansi/yaansi.dart';
 
 import 'lib/domain/usecase/direcao_vento.dart';
@@ -49,6 +51,8 @@ class DirecaoVento {
   }
 
   void _imprimirDirecao(double direcaoGraus) {
-    print("${direcaoGraus.toStringAsFixed(1)} graus".green);
+    print("${direcaoGraus.toStringAsFixed(1)} graus".yellow);
+    double radianos=direcaoGraus * pi / 180;
+     print("${radianos.toStringAsFixed(1)} radianos".yellow);
   }
 }

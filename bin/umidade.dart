@@ -11,7 +11,7 @@ class UmidadeAr {
   Future<void> informacoesMediaAno(String siglaEstado, String ano) async {
     print("\nMedia de umidade do ar no estado $siglaEstado no ano $ano:");
     final media = await useCase.mediaPorEstadoPorAno(siglaEstado, ano);
-    _imprimirUmidadeAr(media);
+     print("${media.toStringAsFixed(2)}%".green);
   }
 
   Future<void> informacoesMediaMesAno(String ano, String siglaEstado) async {
@@ -21,14 +21,14 @@ class UmidadeAr {
         "\nMedia de umidade do ar no estado $siglaEstado do mes $mes de $ano:",
       );
       final media = await useCase.mediaPorEstadoPorMes(siglaEstado, mes, ano);
-      _imprimirUmidadeAr(media);
+       print("${media.toStringAsFixed(2)}%".green);
     }
   }
 
   Future<void> informacoesMinimaAno(String siglaEstado, String ano) async {
     print("\nMinima de umidade do ar no estado $siglaEstado no ano $ano:");
     final minima = await useCase.minimaPorEstadoPorAno(siglaEstado, ano);
-    _imprimirUmidadeAr(minima);
+     print("${minima.toStringAsFixed(2)}%".blue);
   }
 
   Future<void> informacoesMinimaMesAno(String ano, String siglaEstado) async {
@@ -38,14 +38,14 @@ class UmidadeAr {
         "\nMinima de umidade do ar no estado $siglaEstado do mes $mes de $ano:",
       );
       final minima = await useCase.minimaPorEstadoPorMes(siglaEstado, mes, ano);
-      _imprimirUmidadeAr(minima);
+       print("${minima.toStringAsFixed(2)}%".blue);
     }
   }
 
   Future<void> informacoesMaximaAno(String siglaEstado, String ano) async {
     print("\nMaxima de umidade do ar no estado $siglaEstado no ano $ano:");
     final maxima = await useCase.maximaPorEstadoPorAno(siglaEstado, ano);
-    _imprimirUmidadeAr(maxima);
+     print("${maxima.toStringAsFixed(2)}%".red);
   }
 
   Future<void> informacoesMaximaMesAno(String ano, String siglaEstado) async {
@@ -55,7 +55,7 @@ class UmidadeAr {
         "\nMaxima de umidade do ar no estado $siglaEstado do mes $mes de $ano:",
       );
       final maxima = await useCase.maximaPorEstadoPorMes(siglaEstado, mes, ano);
-      _imprimirUmidadeAr(maxima);
+       print("${maxima.toStringAsFixed(2)}%".red);
     }
   }
 
@@ -96,9 +96,5 @@ class UmidadeAr {
     await informacoesMinimaMesAno("2024", "SP");
     await informacoesMinimaMesAno("2025", "SP");
     await informacoesMinimaMesAno("2026", "SP");
-  }
-
-  void _imprimirUmidadeAr(double umidadePercentual) {
-    print("${umidadePercentual.toStringAsFixed(2)}%".blue);
   }
 }
