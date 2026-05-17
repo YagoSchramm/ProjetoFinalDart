@@ -78,8 +78,6 @@ class LeitorCSV implements Leitor {
     List<File?> filtrados = <File?>[];
 
     for (var arquivo in arquivos) {
-        String nomeArquivo = arquivo.uri.pathSegments.last;
-        String semCSV=nomeArquivo.replaceAll(".csv", "");
         filtrados.add(arquivo);
     }
     return filtrados;

@@ -1,8 +1,6 @@
 import 'package:yaansi/yaansi.dart';
 
 import 'lib/domain/usecase/umidade.dart';
-import 'lib/infrastructure/store/leitor.dart';
-
 class UmidadeAr {
   final UmidadeArUseCase useCase;
 
