@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:yaansi/yaansi.dart';
@@ -5,7 +6,7 @@ import 'package:yaansi/yaansi.dart';
 import 'lib/infrastructure/store/leitor.dart';
 
 class DirecaoVento {
-  static const String colunaDirecaoVento = 'direcao_vento_graus';
+  static const String colunaDirecaoVento = 'Dire';
 
   final Leitor leitor;
 
@@ -21,13 +22,20 @@ class DirecaoVento {
     for (final arquivo in arquivos) {
       if (arquivo == null) continue;
 
-      final linhas = await arquivo.readAsLines();
+      final linhas = await arquivo.readAsLines(encoding: latin1);
       final colunas = linhas.first.trim().split(',');
-      final indiceDirecaoVento = colunas.indexOf(colunaDirecaoVento);
+      String? coluna;
+      colunas.forEach((colunas) {
+        if (coluna == null && colunas.startsWith(colunaDirecaoVento)) {
+          coluna = colunas;
+        }
+      });
 
-      if (indiceDirecaoVento == -1) {
+      if (coluna == null) {
         throw Exception('Erro ao encontrar coluna $colunaDirecaoVento');
       }
+
+      final indiceDirecaoVento = colunas.indexOf(coluna!);
 
       for (var i = 1; i < linhas.length; i++) {
         final linha = linhas[i].trim();
@@ -66,17 +74,24 @@ class DirecaoVento {
     String mes,
     String ano,
   ) async {
-    final arquivo = await leitor.getByMonth(siglaEstado, mes, ano);
+    final arquivo = await leitor.getByMonth(siglaEstado, mes);
     if (arquivo == null) throw Exception('Erro ao filtrar arquivo');
 
-    final linhas = await arquivo.readAsLines();
+    final linhas = await arquivo.readAsLines(encoding: latin1);
     final colunas = linhas.first.trim().split(',');
-    final indiceDirecaoVento = colunas.indexOf(colunaDirecaoVento);
-    final valores = <double>[];
+    String? coluna;
+    colunas.forEach((colunas) {
+      if (coluna == null && colunas.startsWith(colunaDirecaoVento)) {
+        coluna = colunas;
+      }
+    });
 
-    if (indiceDirecaoVento == -1) {
+    if (coluna == null) {
       throw Exception('Erro ao encontrar coluna $colunaDirecaoVento');
     }
+
+    final indiceDirecaoVento = colunas.indexOf(coluna!);
+    final valores = <double>[];
 
     for (var i = 1; i < linhas.length; i++) {
       final linha = linhas[i].trim();
@@ -111,34 +126,30 @@ class DirecaoVento {
 
   Future<void> informacoes() async {
     final estados = ['SC', 'SP'];
-    final anos = ['2024', '2025', '2026'];
+    const ano = '2024';
 
     for (final estado in estados) {
-      for (final ano in anos) {
-        final direcao = await direcaoMaisFrequentePorEstadoPorAno(estado, ano);
-        print(
-          '\nDirecao do vento com maior frequencia no estado $estado no ano $ano:',
-        );
-        print('${direcao.toStringAsFixed(1)} graus'.yellow);
-        print('${(direcao * pi / 180).toStringAsFixed(1)} radianos'.yellow);
-      }
+      final direcao = await direcaoMaisFrequentePorEstadoPorAno(estado, ano);
+      print(
+        '\nDirecao do vento com maior frequencia no estado $estado no ano $ano:',
+      );
+      print('${direcao.toStringAsFixed(1)} graus'.yellow);
+      print('${(direcao * pi / 180).toStringAsFixed(1)} radianos'.yellow);
     }
 
     for (final estado in estados) {
-      for (final ano in anos) {
-        for (var i = 1; i <= 12; i++) {
-          final mes = i.toString().padLeft(2, '0');
-          final direcao = await direcaoMaisFrequentePorEstadoPorMes(
-            estado,
-            mes,
-            ano,
-          );
-          print(
-            '\nDirecao do vento com maior frequencia no estado $estado no mes $mes de $ano:',
-          );
-          print('${direcao.toStringAsFixed(1)} graus'.yellow);
-          print('${(direcao * pi / 180).toStringAsFixed(1)} radianos'.yellow);
-        }
+      for (var i = 1; i <= 12; i++) {
+        final mes = i.toString();
+        final direcao = await direcaoMaisFrequentePorEstadoPorMes(
+          estado,
+          mes,
+          ano,
+        );
+        print(
+          '\nDirecao do vento com maior frequencia no estado $estado no mes $mes de $ano:',
+        );
+        print('${direcao.toStringAsFixed(1)} graus'.yellow);
+        print('${(direcao * pi / 180).toStringAsFixed(1)} radianos'.yellow);
       }
     }
   }
