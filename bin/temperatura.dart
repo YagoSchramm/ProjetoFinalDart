@@ -1,10 +1,12 @@
+import 'dart:convert';
+
 import 'package:yaansi/yaansi.dart';
 
 import 'lib/infrastructure/store/leitor.dart';
 
 class Temperatura {
-  static const String colunaTemperatura = 'temperatura_celsius';
-  static const String colunaHora = 'hora';
+  static const String colunaTemperatura = 'Temperatura';
+  static const String colunaHora = 'Hora';
 
   final Leitor leitor;
 
@@ -12,19 +14,25 @@ class Temperatura {
 
   Future<double> mediaPorEstadoPorAno(String siglaEstado, String ano) async {
     final arquivos = await leitor.getByYear(siglaEstado, ano);
-    final valores = <double>[];
 
+    final valores = <double>[];
     for (final arquivo in arquivos) {
       if (arquivo == null) continue;
 
-      final linhas = await arquivo.readAsLines();
+      final linhas = await arquivo.readAsLines(encoding: latin1);
       final colunas = linhas.first.trim().split(',');
-      final indiceTemperatura = colunas.indexOf(colunaTemperatura);
+      String? coluna;
+      colunas.forEach((colunas) {
+        if (coluna == null && colunas.startsWith(colunaTemperatura)) {
+          coluna = colunas;
+        }
+      });
 
-      if (indiceTemperatura == -1) {
+      if (coluna == null) {
         throw Exception('Erro ao encontrar coluna $colunaTemperatura');
       }
 
+      final indiceTemperatura = colunas.indexOf(coluna!);
       for (var i = 1; i < linhas.length; i++) {
         final linha = linhas[i].trim();
         if (linha.isEmpty) continue;
@@ -48,17 +56,24 @@ class Temperatura {
     String mes,
     String ano,
   ) async {
-    final arquivo = await leitor.getByMonth(siglaEstado, mes, ano);
+    final arquivo = await leitor.getByMonth(siglaEstado, mes);
     if (arquivo == null) throw Exception('Erro ao filtrar arquivo');
 
-    final linhas = await arquivo.readAsLines();
+    final linhas = await arquivo.readAsLines(encoding: latin1);
     final colunas = linhas.first.trim().split(',');
-    final indiceTemperatura = colunas.indexOf(colunaTemperatura);
-    final valores = <double>[];
+    String? coluna;
+    colunas.forEach((colunas) {
+      if (coluna == null && colunas.startsWith(colunaTemperatura)) {
+        coluna = colunas;
+      }
+    });
 
-    if (indiceTemperatura == -1) {
+    if (coluna == null) {
       throw Exception('Erro ao encontrar coluna $colunaTemperatura');
     }
+
+    final indiceTemperatura = colunas.indexOf(coluna!);
+    final valores = <double>[];
 
     for (var i = 1; i < linhas.length; i++) {
       final linha = linhas[i].trim();
@@ -84,13 +99,20 @@ class Temperatura {
     for (final arquivo in arquivos) {
       if (arquivo == null) continue;
 
-      final linhas = await arquivo.readAsLines();
+      final linhas = await arquivo.readAsLines(encoding: latin1);
       final colunas = linhas.first.trim().split(',');
-      final indiceTemperatura = colunas.indexOf(colunaTemperatura);
+      String? coluna;
+      colunas.forEach((colunas) {
+        if (coluna == null && colunas.startsWith(colunaTemperatura)) {
+          coluna = colunas;
+        }
+      });
 
-      if (indiceTemperatura == -1) {
+      if (coluna == null) {
         throw Exception('Erro ao encontrar coluna $colunaTemperatura');
       }
+
+      final indiceTemperatura = colunas.indexOf(coluna!);
 
       for (var i = 1; i < linhas.length; i++) {
         final linha = linhas[i].trim();
@@ -115,17 +137,24 @@ class Temperatura {
     String mes,
     String ano,
   ) async {
-    final arquivo = await leitor.getByMonth(siglaEstado, mes, ano);
+    final arquivo = await leitor.getByMonth(siglaEstado, mes);
     if (arquivo == null) throw Exception('Erro ao filtrar arquivo');
 
-    final linhas = await arquivo.readAsLines();
+    final linhas = await arquivo.readAsLines(encoding: latin1);
     final colunas = linhas.first.trim().split(',');
-    final indiceTemperatura = colunas.indexOf(colunaTemperatura);
-    final valores = <double>[];
+    String? coluna;
+    colunas.forEach((colunas) {
+      if (coluna == null && colunas.startsWith(colunaTemperatura)) {
+        coluna = colunas;
+      }
+    });
 
-    if (indiceTemperatura == -1) {
+    if (coluna == null) {
       throw Exception('Erro ao encontrar coluna $colunaTemperatura');
     }
+
+    final indiceTemperatura = colunas.indexOf(coluna!);
+    final valores = <double>[];
 
     for (var i = 1; i < linhas.length; i++) {
       final linha = linhas[i].trim();
@@ -151,14 +180,20 @@ class Temperatura {
     for (final arquivo in arquivos) {
       if (arquivo == null) continue;
 
-      final linhas = await arquivo.readAsLines();
+      final linhas = await arquivo.readAsLines(encoding: latin1);
       final colunas = linhas.first.trim().split(',');
-      final indiceTemperatura = colunas.indexOf(colunaTemperatura);
+      String? coluna;
+      colunas.forEach((colunas) {
+        if (coluna == null && colunas.startsWith(colunaTemperatura)) {
+          coluna = colunas;
+        }
+      });
 
-      if (indiceTemperatura == -1) {
+      if (coluna == null) {
         throw Exception('Erro ao encontrar coluna $colunaTemperatura');
       }
 
+      final indiceTemperatura = colunas.indexOf(coluna!);
       for (var i = 1; i < linhas.length; i++) {
         final linha = linhas[i].trim();
         if (linha.isEmpty) continue;
@@ -182,17 +217,24 @@ class Temperatura {
     String mes,
     String ano,
   ) async {
-    final arquivo = await leitor.getByMonth(siglaEstado, mes, ano);
+    final arquivo = await leitor.getByMonth(siglaEstado, mes);
     if (arquivo == null) throw Exception('Erro ao filtrar arquivo');
 
-    final linhas = await arquivo.readAsLines();
+    final linhas = await arquivo.readAsLines(encoding: latin1);
     final colunas = linhas.first.trim().split(',');
-    final indiceTemperatura = colunas.indexOf(colunaTemperatura);
-    final valores = <double>[];
+    String? coluna;
+    colunas.forEach((colunas) {
+      if (coluna == null && colunas.startsWith(colunaTemperatura)) {
+        coluna = colunas;
+      }
+    });
 
-    if (indiceTemperatura == -1) {
+    if (coluna == null) {
       throw Exception('Erro ao encontrar coluna $colunaTemperatura');
     }
+
+    final indiceTemperatura = colunas.indexOf(coluna!);
+    final valores = <double>[];
 
     for (var i = 1; i < linhas.length; i++) {
       final linha = linhas[i].trim();
@@ -221,14 +263,21 @@ class Temperatura {
     for (final arquivo in arquivos) {
       if (arquivo == null) continue;
 
-      final linhas = await arquivo.readAsLines();
+      final linhas = await arquivo.readAsLines(encoding: latin1);
       final colunas = linhas.first.trim().split(',');
-      final indiceTemperatura = colunas.indexOf(colunaTemperatura);
-      final indiceHora = colunas.indexOf(colunaHora);
+      String? coluna;
+      colunas.forEach((colunas) {
+        if (coluna == null && colunas.startsWith(colunaTemperatura)) {
+          coluna = colunas;
+        }
+      });
 
-      if (indiceTemperatura == -1) {
+      if (coluna == null) {
         throw Exception('Erro ao encontrar coluna $colunaTemperatura');
       }
+
+      final indiceTemperatura = colunas.indexOf(coluna!);
+      final indiceHora = colunas.indexOf(colunaHora);
 
       if (indiceHora == -1) {
         throw Exception('Erro ao encontrar coluna $colunaHora');
@@ -239,9 +288,7 @@ class Temperatura {
         if (linha.isEmpty) continue;
 
         final campos = linha.split(',');
-        if (campos.length > indiceTemperatura &&
-            campos.length > indiceHora &&
-            campos[indiceHora] == hora) {
+        if (campos[indiceHora] == hora) {
           valores.add(double.parse(campos[indiceTemperatura]));
         }
       }
@@ -256,12 +303,23 @@ class Temperatura {
 
   Future<void> informacoes() async {
     final estados = ['SC', 'SP'];
-    final anos = ['2024', '2025', '2026'];
+    const ano = '2024';
 
     for (final estado in estados) {
-      for (final ano in anos) {
-        final media = await mediaPorEstadoPorAno(estado, ano);
-        print('\nMedia de temperatura do estado $estado no ano $ano:');
+      final media = await mediaPorEstadoPorAno(estado, ano);
+      print('\nMedia de temperatura do estado $estado no ano $ano:');
+      print(media.toStringAsFixed(2).red);
+      print((media * 9 / 5 + 32).toStringAsFixed(2).yellow);
+      print((media + 273.15).toStringAsFixed(2).blue);
+    }
+
+    for (final estado in estados) {
+      for (var i = 1; i <= 12; i++) {
+        final mes = i.toString();
+        final media = await mediaPorEstadoPorMes(estado, mes, ano);
+        print(
+          '\nMedia de temperatura do estado $estado no mes $mes de $ano:',
+        );
         print(media.toStringAsFixed(2).red);
         print((media * 9 / 5 + 32).toStringAsFixed(2).yellow);
         print((media + 273.15).toStringAsFixed(2).blue);
@@ -269,22 +327,20 @@ class Temperatura {
     }
 
     for (final estado in estados) {
-      for (final ano in anos) {
-        for (var i = 1; i <= 12; i++) {
-          final mes = i.toString().padLeft(2, '0');
-          final media = await mediaPorEstadoPorMes(estado, mes, ano);
-          print('\nMedia de temperatura do estado $estado no mes $mes de $ano:');
-          print(media.toStringAsFixed(2).red);
-          print((media * 9 / 5 + 32).toStringAsFixed(2).yellow);
-          print((media + 273.15).toStringAsFixed(2).blue);
-        }
-      }
+      final maxima = await maximaPorEstadoPorAno(estado, ano);
+      print('\nMaxima de temperatura do estado $estado no ano $ano:');
+      print(maxima.toStringAsFixed(2).red);
+      print((maxima * 9 / 5 + 32).toStringAsFixed(2).yellow);
+      print((maxima + 273.15).toStringAsFixed(2).blue);
     }
 
     for (final estado in estados) {
-      for (final ano in anos) {
-        final maxima = await maximaPorEstadoPorAno(estado, ano);
-        print('\nMaxima de temperatura do estado $estado no ano $ano:');
+      for (var i = 1; i <= 12; i++) {
+        final mes = i.toString();
+        final maxima = await maximaPorEstadoPorMes(estado, mes, ano);
+        print(
+          '\nMaxima de temperatura do estado $estado no mes $mes de $ano:',
+        );
         print(maxima.toStringAsFixed(2).red);
         print((maxima * 9 / 5 + 32).toStringAsFixed(2).yellow);
         print((maxima + 273.15).toStringAsFixed(2).blue);
@@ -292,22 +348,20 @@ class Temperatura {
     }
 
     for (final estado in estados) {
-      for (final ano in anos) {
-        for (var i = 1; i <= 12; i++) {
-          final mes = i.toString().padLeft(2, '0');
-          final maxima = await maximaPorEstadoPorMes(estado, mes, ano);
-          print('\nMaxima de temperatura do estado $estado no mes $mes de $ano:');
-          print(maxima.toStringAsFixed(2).red);
-          print((maxima * 9 / 5 + 32).toStringAsFixed(2).yellow);
-          print((maxima + 273.15).toStringAsFixed(2).blue);
-        }
-      }
+      final minima = await minimaPorEstadoPorAno(estado, ano);
+      print('\nMinima de temperatura do estado $estado no ano $ano:');
+      print(minima.toStringAsFixed(2).red);
+      print((minima * 9 / 5 + 32).toStringAsFixed(2).yellow);
+      print((minima + 273.15).toStringAsFixed(2).blue);
     }
 
     for (final estado in estados) {
-      for (final ano in anos) {
-        final minima = await minimaPorEstadoPorAno(estado, ano);
-        print('\nMinima de temperatura do estado $estado no ano $ano:');
+      for (var i = 1; i <= 12; i++) {
+        final mes = i.toString();
+        final minima = await minimaPorEstadoPorMes(estado, mes, ano);
+        print(
+          '\nMinima de temperatura do estado $estado no mes $mes de $ano:',
+        );
         print(minima.toStringAsFixed(2).red);
         print((minima * 9 / 5 + 32).toStringAsFixed(2).yellow);
         print((minima + 273.15).toStringAsFixed(2).blue);
@@ -315,24 +369,11 @@ class Temperatura {
     }
 
     for (final estado in estados) {
-      for (final ano in anos) {
-        for (var i = 1; i <= 12; i++) {
-          final mes = i.toString().padLeft(2, '0');
-          final minima = await minimaPorEstadoPorMes(estado, mes, ano);
-          print('\nMinima de temperatura do estado $estado no mes $mes de $ano:');
-          print(minima.toStringAsFixed(2).red);
-          print((minima * 9 / 5 + 32).toStringAsFixed(2).yellow);
-          print((minima + 273.15).toStringAsFixed(2).blue);
-        }
-      }
-    }
-
-    for (final estado in estados) {
       print('\nMedia de temperatura do estado $estado por hora:');
-      for (var i = 0; i < 24; i += 3) {
-        final hora = '${i.toString().padLeft(2, '0')}:00:00';
+      for (var i = 1; i <= 24; i++) {
+        final hora = i.toString();
         final media = await mediaPorHorarioPorEstado(estado, hora);
-        print('\nHorario $hora:');
+        print('\nHorario ${hora.padLeft(2,"0")}:00:00 :');
         print(media.toStringAsFixed(2).red);
         print((media * 9 / 5 + 32).toStringAsFixed(2).yellow);
         print((media + 273.15).toStringAsFixed(2).blue);

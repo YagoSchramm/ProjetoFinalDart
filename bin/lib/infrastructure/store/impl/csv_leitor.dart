@@ -36,15 +36,13 @@ class LeitorCSV implements Leitor {
   Future<File?> getByMonth(
     String siglaEstado,
     String mes,
-    String ano,
   ) async {
     final arquivos = await getByState(siglaEstado);
     for (var arquivo in arquivos) {
       String nomeArquivo = arquivo.uri.pathSegments.last;
       String semCSV = nomeArquivo.replaceAll('.csv', '');
       List<String> partes = semCSV.split('_');
-
-      if (partes[1] == ano && partes[2] == mes) {
+      if (partes[2] == mes) {
         return arquivo;
       }
     }
@@ -78,8 +76,6 @@ class LeitorCSV implements Leitor {
     List<File?> filtrados = <File?>[];
 
     for (var arquivo in arquivos) {
-        String nomeArquivo = arquivo.uri.pathSegments.last;
-        String semCSV=nomeArquivo.replaceAll(".csv", "");
         filtrados.add(arquivo);
     }
     return filtrados;
