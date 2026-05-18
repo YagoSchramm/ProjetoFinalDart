@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:yaansi/yaansi.dart';
 import 'lib/infrastructure/store/leitor.dart';
@@ -260,73 +261,149 @@ class UmidadeAr {
     return valores.reduce((menor, valor) => valor < menor ? valor : menor);
   }
 
-  Future<void> informacoesMediaAno(String siglaEstado, String ano) async {
-    print("\nMedia de umidade do ar no estado $siglaEstado no ano $ano:");
-    final media = await mediaPorEstadoPorAno(siglaEstado, ano);
-       print("${media.toStringAsFixed(6)} kg/kg".green);
-  }
-
-  Future<void> informacoesMediaMesAno(String ano, String siglaEstado) async {
-    final meses = await leitor.getMonthsByYear(siglaEstado, ano);
-
-    for (final mes in meses) {
-      print(
-        "\nMedia de umidade do ar no estado $siglaEstado do mes $mes de $ano:",
-      );
-      final media = await mediaPorEstadoPorMes(siglaEstado, mes, ano);
-     print("${media.toStringAsFixed(6)} kg/kg".green);
-
-    }
-  }
-
-  Future<void> informacoesMinimaAno(String siglaEstado, String ano) async {
-    print("\nMinima de umidade do ar no estado $siglaEstado no ano $ano:");
-    final minima = await minimaPorEstadoPorAno(siglaEstado, ano);
-       print("${minima.toStringAsFixed(6)} kg/kg".blue);
-  }
-
-  Future<void> informacoesMinimaMesAno(String ano, String siglaEstado) async {
-    final meses = await leitor.getMonthsByYear(siglaEstado, ano);
-
-    for (final mes in meses) {
-      print(
-        "\nMinima de umidade do ar no estado $siglaEstado do mes $mes de $ano:",
-      );
-      final minima = await minimaPorEstadoPorMes(siglaEstado, mes, ano);
-       print("${minima.toStringAsFixed(6)} kg/kg".blue);
-    }
-  }
-
-  Future<void> informacoesMaximaAno(String siglaEstado, String ano) async {
-    print("\nMaxima de umidade do ar no estado $siglaEstado no ano $ano:");
-    final maxima = await maximaPorEstadoPorAno(siglaEstado, ano);
-       print("${maxima.toStringAsFixed(6)} kg/kg".red);
-  }
-
-  Future<void> informacoesMaximaMesAno(String ano, String siglaEstado) async {
-    final meses = await leitor.getMonthsByYear(siglaEstado, ano);
-
-    for (final mes in meses) {
-      print(
-        "\nMaxima de umidade do ar no estado $siglaEstado do mes $mes de $ano:",
-      );
-      final maxima = await maximaPorEstadoPorMes(siglaEstado, mes, ano);
-       print("${maxima.toStringAsFixed(6)} kg/kg".red);
-    }
-  }
-
   Future<void> informacoes() async {
-    await informacoesMediaAno("SC", "2024");
-    await informacoesMediaAno("SP", "2024");
-    await informacoesMediaMesAno("2024", "SC");
-    await informacoesMediaMesAno("2024", "SP");
-    await informacoesMaximaAno("SC", "2024");
-    await informacoesMaximaAno("SP", "2024");
-    await informacoesMaximaMesAno("2024", "SC");
-    await informacoesMaximaMesAno("2024", "SP");
-    await informacoesMinimaAno("SC", "2024");
-    await informacoesMinimaAno("SP", "2024");
-    await informacoesMinimaMesAno("2024", "SC");
-    await informacoesMinimaMesAno("2024", "SP");
+    final estados = ['SC', 'SP'];
+    const ano = '2024';
+
+    for (final estado in estados) {
+      final media = await mediaPorEstadoPorAno(estado, ano);
+      print("\nMedia de umidade do ar no estado $estado no ano $ano:");
+      print("${media.toStringAsFixed(6)} kg/kg".green);
+    }
+
+    for (final estado in estados) {
+      final meses = await leitor.getMonthsByYear(estado, ano);
+
+      for (final mes in meses) {
+        final media = await mediaPorEstadoPorMes(estado, mes, ano);
+        print(
+          "\nMedia de umidade do ar no estado $estado do mes $mes de $ano:",
+        );
+        print("${media.toStringAsFixed(6)} kg/kg".green);
+      }
+    }
+
+    for (final estado in estados) {
+      final maxima = await maximaPorEstadoPorAno(estado, ano);
+      print("\nMaxima de umidade do ar no estado $estado no ano $ano:");
+      print("${maxima.toStringAsFixed(6)} kg/kg".red);
+    }
+
+    for (final estado in estados) {
+      final meses = await leitor.getMonthsByYear(estado, ano);
+
+      for (final mes in meses) {
+        final maxima = await maximaPorEstadoPorMes(estado, mes, ano);
+        print(
+          "\nMaxima de umidade do ar no estado $estado do mes $mes de $ano:",
+        );
+        print("${maxima.toStringAsFixed(6)} kg/kg".red);
+      }
+    }
+
+    for (final estado in estados) {
+      final minima = await minimaPorEstadoPorAno(estado, ano);
+      print("\nMinima de umidade do ar no estado $estado no ano $ano:");
+      print("${minima.toStringAsFixed(6)} kg/kg".blue);
+    }
+
+    for (final estado in estados) {
+      final meses = await leitor.getMonthsByYear(estado, ano);
+
+      for (final mes in meses) {
+        final minima = await minimaPorEstadoPorMes(estado, mes, ano);
+        print(
+          "\nMinima de umidade do ar no estado $estado do mes $mes de $ano:",
+        );
+        print("${minima.toStringAsFixed(6)} kg/kg".blue);
+      }
+    }
+
+    print(
+      "\nVoce quer gerar um relatorio do conteudo apresentado (1-sim,2-nao)?",
+    );
+    int? opcao = int.tryParse(stdin.readLineSync()!);
+    if (opcao == null) {
+      throw Exception("Erro ao codificar opcao");
+    }
+    switch (opcao) {
+      case 1:
+        await gerarArquivo();
+        print("Fim da execucao");
+        break;
+      default:
+        print("Fim da execucao");
+        break;
+    }
+  }
+
+  Future<void> gerarArquivo() async {
+    final estados = ['SC', 'SP'];
+    const ano = '2024';
+
+    final buffer = StringBuffer();
+
+    for (final estado in estados) {
+      buffer.writeln("\nMedia de umidade do ar no estado $estado no ano $ano:");
+      final media = await mediaPorEstadoPorAno(estado, ano);
+      buffer.writeln("${media.toStringAsFixed(6)} kg/kg");
+    }
+    for (final estado in estados) {
+      final meses = await leitor.getMonthsByYear(estado, ano);
+
+      for (final mes in meses) {
+        final media = await mediaPorEstadoPorMes(estado, mes, ano);
+        buffer.writeln(
+          '\nMedia de umidade do ar no estado $estado do mes $mes de $ano:',
+        );
+        buffer.writeln("${media.toStringAsFixed(6)} kg/kg");
+      }
+    }
+
+    for (final estado in estados) {
+      final maxima = await maximaPorEstadoPorAno(estado, ano);
+      buffer.writeln('\nMaxima de umidade do ar no estado $estado no ano $ano:');
+      buffer.writeln("${maxima.toStringAsFixed(6)} kg/kg");
+    }
+
+    for (final estado in estados) {
+      final meses = await leitor.getMonthsByYear(estado, ano);
+
+      for (final mes in meses) {
+        final maxima = await maximaPorEstadoPorMes(estado, mes, ano);
+        buffer.writeln(
+          '\nMaxima de umidade do ar no estado $estado do mes $mes de $ano:',
+        );
+        buffer.writeln("${maxima.toStringAsFixed(6)} kg/kg");
+      }
+    }
+
+    for (final estado in estados) {
+      final minima = await minimaPorEstadoPorAno(estado, ano);
+      buffer.writeln('\nMinima de umidade do ar no estado $estado no ano $ano:');
+      buffer.writeln("${minima.toStringAsFixed(6)} kg/kg");
+    }
+
+    for (final estado in estados) {
+      final meses = await leitor.getMonthsByYear(estado, ano);
+
+      for (final mes in meses) {
+        final minima = await minimaPorEstadoPorMes(estado, mes, ano);
+        buffer.writeln(
+          '\nMinima de umidade do ar no estado $estado do mes $mes de $ano:',
+        );
+        buffer.writeln("${minima.toStringAsFixed(6)} kg/kg");
+      }
+    }
+    final pasta = Directory('relatorios');
+    if (!await pasta.exists()) {
+      await pasta.create();
+    }
+    final dataEHora = DateTime.now();
+    final data = "${dataEHora.year}-${dataEHora.month}-${dataEHora.day}";
+    final hora = "${dataEHora.hour}-${dataEHora.minute}";
+    final arquivo = File('relatorios/UMIDADE_${data}_$hora.txt');
+    await arquivo.writeAsString(buffer.toString());
+    print("Arquivo salvo com sucesso em: ${arquivo.path}");
   }
 }

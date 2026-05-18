@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:yaansi/yaansi.dart';
@@ -153,5 +154,62 @@ class DirecaoVento {
         print('${(direcao * pi / 180).toStringAsFixed(1)} radianos'.yellow);
       }
     }
+      print(
+        "\nVocê quer gerar um relatório do conteúdo apresentado (1-sim,2-não)?",
+      );
+      int? opcao = int.tryParse(stdin.readLineSync()!);
+      if (opcao == null) {
+        throw Exception("Erro ao codificar opção");
+      }
+      switch (opcao) {
+        case 1:
+          await gerarArquivo();
+          print("Fim da execução");
+          break;
+        default:
+          print("Fim da execução");
+          break;
+      }
+  }
+
+  Future<void> gerarArquivo() async {
+    final estados = ['SC', 'SP'];
+    const ano = '2024';
+    final buffer = StringBuffer();
+
+    for (final estado in estados) {
+      final direcao = await direcaoMaisFrequentePorEstadoPorAno(estado, ano);
+      buffer.writeln(
+        '\nDirecao do vento com maior frequencia no estado $estado no ano $ano:',
+      );
+      buffer.writeln('Graus: ${direcao.toStringAsFixed(1)}');
+      buffer.writeln('Radianos: ${(direcao * pi / 180).toStringAsFixed(1)}');
+    }
+
+    for (final estado in estados) {
+      final meses = await leitor.getMonthsByYear(estado, ano);
+      for (var mes in meses) {
+        final direcao = await direcaoMaisFrequentePorEstadoPorMes(
+          estado,
+          mes,
+          ano,
+        );
+        buffer.writeln(
+          '\nDirecao do vento com maior frequencia no estado $estado no ano $ano:',
+        );
+        buffer.writeln('Graus: ${direcao.toStringAsFixed(1)}');
+        buffer.writeln('Radianos: ${(direcao * pi / 180).toStringAsFixed(1)}');
+      }
+    }
+    final pasta = Directory('relatorios');
+    if (!await pasta.exists()) {
+      await pasta.create();
+    }
+    final dataEHora = DateTime.now();
+    final data = "${dataEHora.year}-${dataEHora.month}-${dataEHora.day}";
+    final hora = "${dataEHora.hour}-${dataEHora.minute}";
+    final arquivo = File('relatorios/VENTO_${data}_$hora.txt');
+    await arquivo.writeAsString(buffer.toString());
+    print("Arquivo salvo com sucesso em: ${arquivo.path}");
   }
 }

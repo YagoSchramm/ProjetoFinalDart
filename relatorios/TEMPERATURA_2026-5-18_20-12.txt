@@ -1,0 +1,758 @@
+Media de temperatura do estado SC no ano 2024:
+Celsius: 18.81
+Fahrenheit: 65.87
+Kelvin: 291.96
+
+Media de temperatura do estado SP no ano 2024:
+Celsius: 16.47
+Fahrenheit: 61.65
+Kelvin: 289.62
+
+
+Media de temperatura do estado SC no mes 1 de 2024:
+Celsius: 23.03
+Fahrenheit: 73.45
+Kelvin: 296.18
+
+
+Media de temperatura do estado SC no mes 2 de 2024:
+Celsius: 22.63
+Fahrenheit: 72.73
+Kelvin: 295.78
+
+
+Media de temperatura do estado SC no mes 3 de 2024:
+Celsius: 22.39
+Fahrenheit: 72.30
+Kelvin: 295.54
+
+
+Media de temperatura do estado SC no mes 4 de 2024:
+Celsius: 19.46
+Fahrenheit: 67.02
+Kelvin: 292.61
+
+
+Media de temperatura do estado SC no mes 5 de 2024:
+Celsius: 16.81
+Fahrenheit: 62.26
+Kelvin: 289.96
+
+
+Media de temperatura do estado SC no mes 6 de 2024:
+Celsius: 15.13
+Fahrenheit: 59.23
+Kelvin: 288.28
+
+
+Media de temperatura do estado SC no mes 7 de 2024:
+Celsius: 15.80
+Fahrenheit: 60.44
+Kelvin: 288.95
+
+
+Media de temperatura do estado SC no mes 8 de 2024:
+Celsius: 15.32
+Fahrenheit: 59.57
+Kelvin: 288.47
+
+
+Media de temperatura do estado SC no mes 9 de 2024:
+Celsius: 17.73
+Fahrenheit: 63.91
+Kelvin: 290.88
+
+
+Media de temperatura do estado SC no mes 10 de 2024:
+Celsius: 17.98
+Fahrenheit: 64.36
+Kelvin: 291.13
+
+
+Media de temperatura do estado SC no mes 11 de 2024:
+Celsius: 19.40
+Fahrenheit: 66.91
+Kelvin: 292.55
+
+
+Media de temperatura do estado SC no mes 12 de 2024:
+Celsius: 20.36
+Fahrenheit: 68.65
+Kelvin: 293.51
+
+
+Media de temperatura do estado SP no mes 1 de 2024:
+Celsius: 19.62
+Fahrenheit: 67.32
+Kelvin: 292.77
+
+
+Media de temperatura do estado SP no mes 2 de 2024:
+Celsius: 19.98
+Fahrenheit: 67.96
+Kelvin: 293.13
+
+
+Media de temperatura do estado SP no mes 3 de 2024:
+Celsius: 19.27
+Fahrenheit: 66.69
+Kelvin: 292.42
+
+
+Media de temperatura do estado SP no mes 4 de 2024:
+Celsius: 16.54
+Fahrenheit: 61.77
+Kelvin: 289.69
+
+
+Media de temperatura do estado SP no mes 5 de 2024:
+Celsius: 15.33
+Fahrenheit: 59.59
+Kelvin: 288.48
+
+
+Media de temperatura do estado SP no mes 6 de 2024:
+Celsius: 14.90
+Fahrenheit: 58.82
+Kelvin: 288.05
+
+
+Media de temperatura do estado SP no mes 7 de 2024:
+Celsius: 13.59
+Fahrenheit: 56.47
+Kelvin: 286.74
+
+
+Media de temperatura do estado SP no mes 8 de 2024:
+Celsius: 13.55
+Fahrenheit: 56.39
+Kelvin: 286.70
+
+
+Media de temperatura do estado SP no mes 9 de 2024:
+Celsius: 15.44
+Fahrenheit: 59.78
+Kelvin: 288.59
+
+
+Media de temperatura do estado SP no mes 10 de 2024:
+Celsius: 15.97
+Fahrenheit: 60.74
+Kelvin: 289.12
+
+
+Media de temperatura do estado SP no mes 11 de 2024:
+Celsius: 16.49
+Fahrenheit: 61.68
+Kelvin: 289.64
+
+
+Media de temperatura do estado SP no mes 12 de 2024:
+Celsius: 17.23
+Fahrenheit: 63.01
+Kelvin: 290.38
+
+
+Maxima de temperatura do estado SC no ano 2024:
+Celsius: 31.70
+Fahrenheit: 89.06
+Kelvin: 304.85
+
+
+Maxima de temperatura do estado SP no ano 2024:
+Celsius: 26.20
+Fahrenheit: 79.16
+Kelvin: 299.35
+
+
+Maxima de temperatura do estado SC no mes 1 de 2024:
+Celsius: 31.70
+Fahrenheit: 89.06
+Kelvin: 304.85
+
+
+Maxima de temperatura do estado SC no mes 2 de 2024:
+Celsius: 28.00
+Fahrenheit: 82.40
+Kelvin: 301.15
+
+
+Maxima de temperatura do estado SC no mes 3 de 2024:
+Celsius: 27.80
+Fahrenheit: 82.04
+Kelvin: 300.95
+
+
+Maxima de temperatura do estado SC no mes 4 de 2024:
+Celsius: 25.20
+Fahrenheit: 77.36
+Kelvin: 298.35
+
+
+Maxima de temperatura do estado SC no mes 5 de 2024:
+Celsius: 22.70
+Fahrenheit: 72.86
+Kelvin: 295.85
+
+
+Maxima de temperatura do estado SC no mes 6 de 2024:
+Celsius: 24.00
+Fahrenheit: 75.20
+Kelvin: 297.15
+
+
+Maxima de temperatura do estado SC no mes 7 de 2024:
+Celsius: 22.00
+Fahrenheit: 71.60
+Kelvin: 295.15
+
+
+Maxima de temperatura do estado SC no mes 8 de 2024:
+Celsius: 20.70
+Fahrenheit: 69.26
+Kelvin: 293.85
+
+
+Maxima de temperatura do estado SC no mes 9 de 2024:
+Celsius: 21.70
+Fahrenheit: 71.06
+Kelvin: 294.85
+
+
+Maxima de temperatura do estado SC no mes 10 de 2024:
+Celsius: 24.50
+Fahrenheit: 76.10
+Kelvin: 297.65
+
+
+Maxima de temperatura do estado SC no mes 11 de 2024:
+Celsius: 26.30
+Fahrenheit: 79.34
+Kelvin: 299.45
+
+
+Maxima de temperatura do estado SC no mes 12 de 2024:
+Celsius: 26.70
+Fahrenheit: 80.06
+Kelvin: 299.85
+
+
+Maxima de temperatura do estado SP no mes 1 de 2024:
+Celsius: 24.70
+Fahrenheit: 76.46
+Kelvin: 297.85
+
+
+Maxima de temperatura do estado SP no mes 2 de 2024:
+Celsius: 26.20
+Fahrenheit: 79.16
+Kelvin: 299.35
+
+
+Maxima de temperatura do estado SP no mes 3 de 2024:
+Celsius: 24.50
+Fahrenheit: 76.10
+Kelvin: 297.65
+
+
+Maxima de temperatura do estado SP no mes 4 de 2024:
+Celsius: 21.10
+Fahrenheit: 69.98
+Kelvin: 294.25
+
+
+Maxima de temperatura do estado SP no mes 5 de 2024:
+Celsius: 21.00
+Fahrenheit: 69.80
+Kelvin: 294.15
+
+
+Maxima de temperatura do estado SP no mes 6 de 2024:
+Celsius: 20.20
+Fahrenheit: 68.36
+Kelvin: 293.35
+
+
+Maxima de temperatura do estado SP no mes 7 de 2024:
+Celsius: 17.80
+Fahrenheit: 64.04
+Kelvin: 290.95
+
+
+Maxima de temperatura do estado SP no mes 8 de 2024:
+Celsius: 19.60
+Fahrenheit: 67.28
+Kelvin: 292.75
+
+
+Maxima de temperatura do estado SP no mes 9 de 2024:
+Celsius: 21.00
+Fahrenheit: 69.80
+Kelvin: 294.15
+
+
+Maxima de temperatura do estado SP no mes 10 de 2024:
+Celsius: 22.10
+Fahrenheit: 71.78
+Kelvin: 295.25
+
+
+Maxima de temperatura do estado SP no mes 11 de 2024:
+Celsius: 21.00
+Fahrenheit: 69.80
+Kelvin: 294.15
+
+
+Maxima de temperatura do estado SP no mes 12 de 2024:
+Celsius: 24.00
+Fahrenheit: 75.20
+Kelvin: 297.15
+
+
+Minima de temperatura do estado SC no ano 2024:
+Celsius: 1.60
+Fahrenheit: 34.88
+Kelvin: 274.75
+
+
+Minima de temperatura do estado SP no ano 2024:
+Celsius: 7.00
+Fahrenheit: 44.60
+Kelvin: 280.15
+
+
+Minima de temperatura do estado SC no mes 1 de 2024:
+Celsius: 18.00
+Fahrenheit: 64.40
+Kelvin: 291.15
+
+
+Minima de temperatura do estado SC no mes 2 de 2024:
+Celsius: 16.10
+Fahrenheit: 60.98
+Kelvin: 289.25
+
+
+Minima de temperatura do estado SC no mes 3 de 2024:
+Celsius: 16.30
+Fahrenheit: 61.34
+Kelvin: 289.45
+
+
+Minima de temperatura do estado SC no mes 4 de 2024:
+Celsius: 11.80
+Fahrenheit: 53.24
+Kelvin: 284.95
+
+
+Minima de temperatura do estado SC no mes 5 de 2024:
+Celsius: 8.50
+Fahrenheit: 47.30
+Kelvin: 281.65
+
+
+Minima de temperatura do estado SC no mes 6 de 2024:
+Celsius: 3.00
+Fahrenheit: 37.40
+Kelvin: 276.15
+
+
+Minima de temperatura do estado SC no mes 7 de 2024:
+Celsius: 4.80
+Fahrenheit: 40.64
+Kelvin: 277.95
+
+
+Minima de temperatura do estado SC no mes 8 de 2024:
+Celsius: 1.60
+Fahrenheit: 34.88
+Kelvin: 274.75
+
+
+Minima de temperatura do estado SC no mes 9 de 2024:
+Celsius: 11.20
+Fahrenheit: 52.16
+Kelvin: 284.35
+
+
+Minima de temperatura do estado SC no mes 10 de 2024:
+Celsius: 9.80
+Fahrenheit: 49.64
+Kelvin: 282.95
+
+
+Minima de temperatura do estado SC no mes 11 de 2024:
+Celsius: 11.80
+Fahrenheit: 53.24
+Kelvin: 284.95
+
+
+Minima de temperatura do estado SC no mes 12 de 2024:
+Celsius: 13.00
+Fahrenheit: 55.40
+Kelvin: 286.15
+
+
+Minima de temperatura do estado SP no mes 1 de 2024:
+Celsius: 15.00
+Fahrenheit: 59.00
+Kelvin: 288.15
+
+
+Minima de temperatura do estado SP no mes 2 de 2024:
+Celsius: 16.30
+Fahrenheit: 61.34
+Kelvin: 289.45
+
+
+Minima de temperatura do estado SP no mes 3 de 2024:
+Celsius: 14.80
+Fahrenheit: 58.64
+Kelvin: 287.95
+
+
+Minima de temperatura do estado SP no mes 4 de 2024:
+Celsius: 11.00
+Fahrenheit: 51.80
+Kelvin: 284.15
+
+
+Minima de temperatura do estado SP no mes 5 de 2024:
+Celsius: 9.20
+Fahrenheit: 48.56
+Kelvin: 282.35
+
+
+Minima de temperatura do estado SP no mes 6 de 2024:
+Celsius: 8.10
+Fahrenheit: 46.58
+Kelvin: 281.25
+
+
+Minima de temperatura do estado SP no mes 7 de 2024:
+Celsius: 9.10
+Fahrenheit: 48.38
+Kelvin: 282.25
+
+
+Minima de temperatura do estado SP no mes 8 de 2024:
+Celsius: 7.00
+Fahrenheit: 44.60
+Kelvin: 280.15
+
+
+Minima de temperatura do estado SP no mes 9 de 2024:
+Celsius: 9.00
+Fahrenheit: 48.20
+Kelvin: 282.15
+
+
+Minima de temperatura do estado SP no mes 10 de 2024:
+Celsius: 9.60
+Fahrenheit: 49.28
+Kelvin: 282.75
+
+
+Minima de temperatura do estado SP no mes 11 de 2024:
+Celsius: 12.10
+Fahrenheit: 53.78
+Kelvin: 285.25
+
+
+Minima de temperatura do estado SP no mes 12 de 2024:
+Celsius: 11.80
+Fahrenheit: 53.24
+Kelvin: 284.95
+
+
+Media de temperatura do estado SC por hora:
+
+Horario 01:00:00 :
+Celsius: 18.07
+Fahrenheit: 64.52
+Kelvin: 291.22
+
+
+Horario 02:00:00 :
+Celsius: 17.95
+Fahrenheit: 64.32
+Kelvin: 291.10
+
+
+Horario 03:00:00 :
+Celsius: 17.84
+Fahrenheit: 64.11
+Kelvin: 290.99
+
+
+Horario 04:00:00 :
+Celsius: 17.78
+Fahrenheit: 64.01
+Kelvin: 290.93
+
+
+Horario 05:00:00 :
+Celsius: 17.63
+Fahrenheit: 63.74
+Kelvin: 290.78
+
+
+Horario 06:00:00 :
+Celsius: 17.45
+Fahrenheit: 63.41
+Kelvin: 290.60
+
+
+Horario 07:00:00 :
+Celsius: 17.38
+Fahrenheit: 63.28
+Kelvin: 290.53
+
+
+Horario 08:00:00 :
+Celsius: 17.59
+Fahrenheit: 63.66
+Kelvin: 290.74
+
+
+Horario 09:00:00 :
+Celsius: 18.20
+Fahrenheit: 64.76
+Kelvin: 291.35
+
+
+Horario 10:00:00 :
+Celsius: 18.88
+Fahrenheit: 65.99
+Kelvin: 292.03
+
+
+Horario 11:00:00 :
+Celsius: 19.51
+Fahrenheit: 67.12
+Kelvin: 292.66
+
+
+Horario 12:00:00 :
+Celsius: 19.98
+Fahrenheit: 67.97
+Kelvin: 293.13
+
+
+Horario 13:00:00 :
+Celsius: 20.37
+Fahrenheit: 68.67
+Kelvin: 293.52
+
+
+Horario 14:00:00 :
+Celsius: 20.54
+Fahrenheit: 68.97
+Kelvin: 293.69
+
+
+Horario 15:00:00 :
+Celsius: 20.53
+Fahrenheit: 68.95
+Kelvin: 293.68
+
+
+Horario 16:00:00 :
+Celsius: 20.42
+Fahrenheit: 68.75
+Kelvin: 293.57
+
+
+Horario 17:00:00 :
+Celsius: 20.13
+Fahrenheit: 68.24
+Kelvin: 293.28
+
+
+Horario 18:00:00 :
+Celsius: 19.76
+Fahrenheit: 67.57
+Kelvin: 292.91
+
+
+Horario 19:00:00 :
+Celsius: 19.26
+Fahrenheit: 66.66
+Kelvin: 292.41
+
+
+Horario 20:00:00 :
+Celsius: 18.84
+Fahrenheit: 65.90
+Kelvin: 291.99
+
+
+Horario 21:00:00 :
+Celsius: 18.60
+Fahrenheit: 65.48
+Kelvin: 291.75
+
+
+Horario 22:00:00 :
+Celsius: 18.41
+Fahrenheit: 65.13
+Kelvin: 291.56
+
+
+Horario 23:00:00 :
+Celsius: 18.27
+Fahrenheit: 64.89
+Kelvin: 291.42
+
+
+Horario 24:00:00 :
+Celsius: 18.15
+Fahrenheit: 64.66
+Kelvin: 291.30
+
+
+Media de temperatura do estado SP por hora:
+
+Horario 01:00:00 :
+Celsius: 15.93
+Fahrenheit: 60.68
+Kelvin: 289.08
+
+
+Horario 02:00:00 :
+Celsius: 15.79
+Fahrenheit: 60.42
+Kelvin: 288.94
+
+
+Horario 03:00:00 :
+Celsius: 15.63
+Fahrenheit: 60.13
+Kelvin: 288.78
+
+
+Horario 04:00:00 :
+Celsius: 15.46
+Fahrenheit: 59.83
+Kelvin: 288.61
+
+
+Horario 05:00:00 :
+Celsius: 15.31
+Fahrenheit: 59.56
+Kelvin: 288.46
+
+
+Horario 06:00:00 :
+Celsius: 15.15
+Fahrenheit: 59.27
+Kelvin: 288.30
+
+
+Horario 07:00:00 :
+Celsius: 15.07
+Fahrenheit: 59.12
+Kelvin: 288.22
+
+
+Horario 08:00:00 :
+Celsius: 15.16
+Fahrenheit: 59.29
+Kelvin: 288.31
+
+
+Horario 09:00:00 :
+Celsius: 15.57
+Fahrenheit: 60.02
+Kelvin: 288.72
+
+
+Horario 10:00:00 :
+Celsius: 16.17
+Fahrenheit: 61.10
+Kelvin: 289.32
+
+
+Horario 11:00:00 :
+Celsius: 16.88
+Fahrenheit: 62.39
+Kelvin: 290.03
+
+
+Horario 12:00:00 :
+Celsius: 17.36
+Fahrenheit: 63.24
+Kelvin: 290.51
+
+
+Horario 13:00:00 :
+Celsius: 17.70
+Fahrenheit: 63.86
+Kelvin: 290.85
+
+
+Horario 14:00:00 :
+Celsius: 17.91
+Fahrenheit: 64.24
+Kelvin: 291.06
+
+
+Horario 15:00:00 :
+Celsius: 17.96
+Fahrenheit: 64.32
+Kelvin: 291.11
+
+
+Horario 16:00:00 :
+Celsius: 17.90
+Fahrenheit: 64.22
+Kelvin: 291.05
+
+
+Horario 17:00:00 :
+Celsius: 17.76
+Fahrenheit: 63.98
+Kelvin: 290.91
+
+
+Horario 18:00:00 :
+Celsius: 17.48
+Fahrenheit: 63.46
+Kelvin: 290.63
+
+
+Horario 19:00:00 :
+Celsius: 17.11
+Fahrenheit: 62.80
+Kelvin: 290.26
+
+
+Horario 20:00:00 :
+Celsius: 16.78
+Fahrenheit: 62.21
+Kelvin: 289.93
+
+
+Horario 21:00:00 :
+Celsius: 16.53
+Fahrenheit: 61.75
+Kelvin: 289.68
+
+
+Horario 22:00:00 :
+Celsius: 16.39
+Fahrenheit: 61.49
+Kelvin: 289.54
+
+
+Horario 23:00:00 :
+Celsius: 16.22
+Fahrenheit: 61.19
+Kelvin: 289.37
+
+
+Horario 24:00:00 :
+Celsius: 16.08
+Fahrenheit: 60.94
+Kelvin: 289.23
+
