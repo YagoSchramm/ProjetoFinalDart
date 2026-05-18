@@ -1,120 +1,342 @@
 import 'package:yaansi/yaansi.dart';
-import './lib/domain/usecase/temperatura.dart';
+
+import 'lib/infrastructure/store/leitor.dart';
 
 class Temperatura {
-  final TemperaturaUseCase useCase;
+  static const String colunaTemperatura = 'temperatura_celsius';
+  static const String colunaHora = 'hora';
 
-  Temperatura({required this.useCase});
+  final Leitor leitor;
 
-  Future<void> informacoesMediaAno(String siglaEstado, String ano) async {
-    print("\nMedia de temperatuas do estado $siglaEstado no ano $ano :");
-    final mediaC = await useCase.mediaPorEstadoPorAno(siglaEstado, ano);
-    _imprimirTemperaturas(mediaC);
-  }
+  Temperatura({required this.leitor});
 
-  Future<void> informacoesMediaMesAno(String ano, String siglaEstado) async {
-    for (var i = 1; i <= 12; i++) {
-      final mes = i.toString().padLeft(2, "0");
-      print(
-        "\nMedia de temperatuas do estado $siglaEstado do mes $mes de $ano :",
-      );
-      final mediaC = await useCase.mediaPorEstadoPorMes(siglaEstado, mes, ano);
-      _imprimirTemperaturas(mediaC);
+  Future<double> mediaPorEstadoPorAno(String siglaEstado, String ano) async {
+    final arquivos = await leitor.getByYear(siglaEstado, ano);
+    final valores = <double>[];
+
+    for (final arquivo in arquivos) {
+      if (arquivo == null) continue;
+
+      final linhas = await arquivo.readAsLines();
+      final colunas = linhas.first.trim().split(',');
+      final indiceTemperatura = colunas.indexOf(colunaTemperatura);
+
+      if (indiceTemperatura == -1) {
+        throw Exception('Erro ao encontrar coluna $colunaTemperatura');
+      }
+
+      for (var i = 1; i < linhas.length; i++) {
+        final linha = linhas[i].trim();
+        if (linha.isEmpty) continue;
+
+        final campos = linha.split(',');
+        if (campos.length > indiceTemperatura) {
+          valores.add(double.parse(campos[indiceTemperatura]));
+        }
+      }
     }
-  }
 
-  Future<void> informacoesMinimaAno(String siglaEstado, String ano) async {
-    print("\nMinima de temperatuas do estado $siglaEstado no ano $ano :");
-    final minimaC = await useCase.minimaPorEstadoPorAno(siglaEstado, ano);
-    _imprimirTemperaturas(minimaC);
-  }
-
-  Future<void> informacoesMinimaMesAno(String ano, String siglaEstado) async {
-    for (var i = 1; i <= 12; i++) {
-      final mes = i.toString().padLeft(2, "0");
-      print(
-        "\nMinima de temperatuas do estado $siglaEstado do mes $mes de $ano :",
-      );
-      final minimaC = await useCase.minimaPorEstadoPorMes(siglaEstado, mes, ano);
-      _imprimirTemperaturas(minimaC);
+    if (valores.isEmpty) {
+      throw Exception('Nenhum valor de temperatura encontrado');
     }
+
+    return valores.reduce((soma, valor) => soma + valor) / valores.length;
   }
 
-  Future<void> informacoesMaximaAno(String siglaEstado, String ano) async {
-    print("\nMaxima de temperatuas do estado $siglaEstado no ano $ano :");
-    final maximaC = await useCase.maximaPorEstadoPorAno(siglaEstado, ano);
-    _imprimirTemperaturas(maximaC);
-  }
+  Future<double> mediaPorEstadoPorMes(
+    String siglaEstado,
+    String mes,
+    String ano,
+  ) async {
+    final arquivo = await leitor.getByMonth(siglaEstado, mes, ano);
+    if (arquivo == null) throw Exception('Erro ao filtrar arquivo');
 
-  Future<void> informacoesMaximaMesAno(String ano, String siglaEstado) async {
-    for (var i = 1; i <= 12; i++) {
-      final mes = i.toString().padLeft(2, "0");
-      print(
-        "\nMaxima de temperatuas do estado $siglaEstado do mes $mes de $ano :",
-      );
-      final maximaC = await useCase.maximaPorEstadoPorMes(siglaEstado, mes, ano);
-      _imprimirTemperaturas(maximaC);
+    final linhas = await arquivo.readAsLines();
+    final colunas = linhas.first.trim().split(',');
+    final indiceTemperatura = colunas.indexOf(colunaTemperatura);
+    final valores = <double>[];
+
+    if (indiceTemperatura == -1) {
+      throw Exception('Erro ao encontrar coluna $colunaTemperatura');
     }
+
+    for (var i = 1; i < linhas.length; i++) {
+      final linha = linhas[i].trim();
+      if (linha.isEmpty) continue;
+
+      final campos = linha.split(',');
+      if (campos.length > indiceTemperatura) {
+        valores.add(double.parse(campos[indiceTemperatura]));
+      }
+    }
+
+    if (valores.isEmpty) {
+      throw Exception('Nenhum valor de temperatura encontrado');
+    }
+
+    return valores.reduce((soma, valor) => soma + valor) / valores.length;
   }
 
-  Future<void> informacoesHoras(String siglaEstado) async {
-    print("\nMedia de temperatuas do estado $siglaEstado por hora:");
+  Future<double> maximaPorEstadoPorAno(String siglaEstado, String ano) async {
+    final arquivos = await leitor.getByYear(siglaEstado, ano);
+    final valores = <double>[];
 
-    for (var i = 0; i < 24; i += 3) {
-      final hora = "${i.toString().padLeft(2, "0")}:00:00";
-      print("\nHorario $hora:");
+    for (final arquivo in arquivos) {
+      if (arquivo == null) continue;
 
-      final mediaC = await useCase.mediaPorHorarioPorEstado(siglaEstado, hora);
-      _imprimirTemperaturas(mediaC);
+      final linhas = await arquivo.readAsLines();
+      final colunas = linhas.first.trim().split(',');
+      final indiceTemperatura = colunas.indexOf(colunaTemperatura);
+
+      if (indiceTemperatura == -1) {
+        throw Exception('Erro ao encontrar coluna $colunaTemperatura');
+      }
+
+      for (var i = 1; i < linhas.length; i++) {
+        final linha = linhas[i].trim();
+        if (linha.isEmpty) continue;
+
+        final campos = linha.split(',');
+        if (campos.length > indiceTemperatura) {
+          valores.add(double.parse(campos[indiceTemperatura]));
+        }
+      }
     }
+
+    if (valores.isEmpty) {
+      throw Exception('Nenhum valor de temperatura encontrado');
+    }
+
+    return valores.reduce((maior, valor) => valor > maior ? valor : maior);
+  }
+
+  Future<double> maximaPorEstadoPorMes(
+    String siglaEstado,
+    String mes,
+    String ano,
+  ) async {
+    final arquivo = await leitor.getByMonth(siglaEstado, mes, ano);
+    if (arquivo == null) throw Exception('Erro ao filtrar arquivo');
+
+    final linhas = await arquivo.readAsLines();
+    final colunas = linhas.first.trim().split(',');
+    final indiceTemperatura = colunas.indexOf(colunaTemperatura);
+    final valores = <double>[];
+
+    if (indiceTemperatura == -1) {
+      throw Exception('Erro ao encontrar coluna $colunaTemperatura');
+    }
+
+    for (var i = 1; i < linhas.length; i++) {
+      final linha = linhas[i].trim();
+      if (linha.isEmpty) continue;
+
+      final campos = linha.split(',');
+      if (campos.length > indiceTemperatura) {
+        valores.add(double.parse(campos[indiceTemperatura]));
+      }
+    }
+
+    if (valores.isEmpty) {
+      throw Exception('Nenhum valor de temperatura encontrado');
+    }
+
+    return valores.reduce((maior, valor) => valor > maior ? valor : maior);
+  }
+
+  Future<double> minimaPorEstadoPorAno(String siglaEstado, String ano) async {
+    final arquivos = await leitor.getByYear(siglaEstado, ano);
+    final valores = <double>[];
+
+    for (final arquivo in arquivos) {
+      if (arquivo == null) continue;
+
+      final linhas = await arquivo.readAsLines();
+      final colunas = linhas.first.trim().split(',');
+      final indiceTemperatura = colunas.indexOf(colunaTemperatura);
+
+      if (indiceTemperatura == -1) {
+        throw Exception('Erro ao encontrar coluna $colunaTemperatura');
+      }
+
+      for (var i = 1; i < linhas.length; i++) {
+        final linha = linhas[i].trim();
+        if (linha.isEmpty) continue;
+
+        final campos = linha.split(',');
+        if (campos.length > indiceTemperatura) {
+          valores.add(double.parse(campos[indiceTemperatura]));
+        }
+      }
+    }
+
+    if (valores.isEmpty) {
+      throw Exception('Nenhum valor de temperatura encontrado');
+    }
+
+    return valores.reduce((menor, valor) => valor < menor ? valor : menor);
+  }
+
+  Future<double> minimaPorEstadoPorMes(
+    String siglaEstado,
+    String mes,
+    String ano,
+  ) async {
+    final arquivo = await leitor.getByMonth(siglaEstado, mes, ano);
+    if (arquivo == null) throw Exception('Erro ao filtrar arquivo');
+
+    final linhas = await arquivo.readAsLines();
+    final colunas = linhas.first.trim().split(',');
+    final indiceTemperatura = colunas.indexOf(colunaTemperatura);
+    final valores = <double>[];
+
+    if (indiceTemperatura == -1) {
+      throw Exception('Erro ao encontrar coluna $colunaTemperatura');
+    }
+
+    for (var i = 1; i < linhas.length; i++) {
+      final linha = linhas[i].trim();
+      if (linha.isEmpty) continue;
+
+      final campos = linha.split(',');
+      if (campos.length > indiceTemperatura) {
+        valores.add(double.parse(campos[indiceTemperatura]));
+      }
+    }
+
+    if (valores.isEmpty) {
+      throw Exception('Nenhum valor de temperatura encontrado');
+    }
+
+    return valores.reduce((menor, valor) => valor < menor ? valor : menor);
+  }
+
+  Future<double> mediaPorHorarioPorEstado(
+    String siglaEstado,
+    String hora,
+  ) async {
+    final arquivos = await leitor.getByHour(siglaEstado, hora);
+    final valores = <double>[];
+
+    for (final arquivo in arquivos) {
+      if (arquivo == null) continue;
+
+      final linhas = await arquivo.readAsLines();
+      final colunas = linhas.first.trim().split(',');
+      final indiceTemperatura = colunas.indexOf(colunaTemperatura);
+      final indiceHora = colunas.indexOf(colunaHora);
+
+      if (indiceTemperatura == -1) {
+        throw Exception('Erro ao encontrar coluna $colunaTemperatura');
+      }
+
+      if (indiceHora == -1) {
+        throw Exception('Erro ao encontrar coluna $colunaHora');
+      }
+
+      for (var i = 1; i < linhas.length; i++) {
+        final linha = linhas[i].trim();
+        if (linha.isEmpty) continue;
+
+        final campos = linha.split(',');
+        if (campos.length > indiceTemperatura &&
+            campos.length > indiceHora &&
+            campos[indiceHora] == hora) {
+          valores.add(double.parse(campos[indiceTemperatura]));
+        }
+      }
+    }
+
+    if (valores.isEmpty) {
+      throw Exception('Nenhum valor de temperatura encontrado');
+    }
+
+    return valores.reduce((soma, valor) => soma + valor) / valores.length;
   }
 
   Future<void> informacoes() async {
-    await informacoesMediaAno("SC", "2024");
-    await informacoesMediaAno("SC", "2025");
-    await informacoesMediaAno("SC", "2026");
-    await informacoesMediaAno("SP", "2024");
-    await informacoesMediaAno("SP", "2025");
-    await informacoesMediaAno("SP", "2026");
-    await informacoesMediaMesAno("2024", "SC");
-    await informacoesMediaMesAno("2025", "SC");
-    await informacoesMediaMesAno("2026", "SC");
-    await informacoesMediaMesAno("2024", "SP");
-    await informacoesMediaMesAno("2025", "SP");
-    await informacoesMediaMesAno("2026", "SP");
-    await informacoesMaximaAno("SC", "2024");
-    await informacoesMaximaAno("SC", "2025");
-    await informacoesMaximaAno("SC", "2026");
-    await informacoesMaximaAno("SP", "2024");
-    await informacoesMaximaAno("SP", "2025");
-    await informacoesMaximaAno("SP", "2026");
-    await informacoesMaximaMesAno("2024", "SC");
-    await informacoesMaximaMesAno("2025", "SC");
-    await informacoesMaximaMesAno("2026", "SC");
-    await informacoesMaximaMesAno("2024", "SP");
-    await informacoesMaximaMesAno("2025", "SP");
-    await informacoesMaximaMesAno("2026", "SP");
-    await informacoesMinimaAno("SC", "2024");
-    await informacoesMinimaAno("SC", "2025");
-    await informacoesMinimaAno("SC", "2026");
-    await informacoesMinimaAno("SP", "2024");
-    await informacoesMinimaAno("SP", "2025");
-    await informacoesMinimaAno("SP", "2026");
-    await informacoesMinimaMesAno("2024", "SC");
-    await informacoesMinimaMesAno("2025", "SC");
-    await informacoesMinimaMesAno("2026", "SC");
-    await informacoesMinimaMesAno("2024", "SP");
-    await informacoesMinimaMesAno("2025", "SP");
-    await informacoesMinimaMesAno("2026", "SP");
-    await informacoesHoras("SC");
-    await informacoesHoras("SP");
-  }
+    final estados = ['SC', 'SP'];
+    final anos = ['2024', '2025', '2026'];
 
-  void _imprimirTemperaturas(double temperaturaCelsius) {
-    print(temperaturaCelsius.toStringAsFixed(2).red);
-    final temperaturaFahrenheit = temperaturaCelsius * 9 / 5 + 32;
-    print(temperaturaFahrenheit.toStringAsFixed(2).yellow);
-    final temperaturaKelvin = temperaturaCelsius + 273.15;
-    print(temperaturaKelvin.toStringAsFixed(2).blue);
+    for (final estado in estados) {
+      for (final ano in anos) {
+        final media = await mediaPorEstadoPorAno(estado, ano);
+        print('\nMedia de temperatura do estado $estado no ano $ano:');
+        print(media.toStringAsFixed(2).red);
+        print((media * 9 / 5 + 32).toStringAsFixed(2).yellow);
+        print((media + 273.15).toStringAsFixed(2).blue);
+      }
+    }
+
+    for (final estado in estados) {
+      for (final ano in anos) {
+        for (var i = 1; i <= 12; i++) {
+          final mes = i.toString().padLeft(2, '0');
+          final media = await mediaPorEstadoPorMes(estado, mes, ano);
+          print('\nMedia de temperatura do estado $estado no mes $mes de $ano:');
+          print(media.toStringAsFixed(2).red);
+          print((media * 9 / 5 + 32).toStringAsFixed(2).yellow);
+          print((media + 273.15).toStringAsFixed(2).blue);
+        }
+      }
+    }
+
+    for (final estado in estados) {
+      for (final ano in anos) {
+        final maxima = await maximaPorEstadoPorAno(estado, ano);
+        print('\nMaxima de temperatura do estado $estado no ano $ano:');
+        print(maxima.toStringAsFixed(2).red);
+        print((maxima * 9 / 5 + 32).toStringAsFixed(2).yellow);
+        print((maxima + 273.15).toStringAsFixed(2).blue);
+      }
+    }
+
+    for (final estado in estados) {
+      for (final ano in anos) {
+        for (var i = 1; i <= 12; i++) {
+          final mes = i.toString().padLeft(2, '0');
+          final maxima = await maximaPorEstadoPorMes(estado, mes, ano);
+          print('\nMaxima de temperatura do estado $estado no mes $mes de $ano:');
+          print(maxima.toStringAsFixed(2).red);
+          print((maxima * 9 / 5 + 32).toStringAsFixed(2).yellow);
+          print((maxima + 273.15).toStringAsFixed(2).blue);
+        }
+      }
+    }
+
+    for (final estado in estados) {
+      for (final ano in anos) {
+        final minima = await minimaPorEstadoPorAno(estado, ano);
+        print('\nMinima de temperatura do estado $estado no ano $ano:');
+        print(minima.toStringAsFixed(2).red);
+        print((minima * 9 / 5 + 32).toStringAsFixed(2).yellow);
+        print((minima + 273.15).toStringAsFixed(2).blue);
+      }
+    }
+
+    for (final estado in estados) {
+      for (final ano in anos) {
+        for (var i = 1; i <= 12; i++) {
+          final mes = i.toString().padLeft(2, '0');
+          final minima = await minimaPorEstadoPorMes(estado, mes, ano);
+          print('\nMinima de temperatura do estado $estado no mes $mes de $ano:');
+          print(minima.toStringAsFixed(2).red);
+          print((minima * 9 / 5 + 32).toStringAsFixed(2).yellow);
+          print((minima + 273.15).toStringAsFixed(2).blue);
+        }
+      }
+    }
+
+    for (final estado in estados) {
+      print('\nMedia de temperatura do estado $estado por hora:');
+      for (var i = 0; i < 24; i += 3) {
+        final hora = '${i.toString().padLeft(2, '0')}:00:00';
+        final media = await mediaPorHorarioPorEstado(estado, hora);
+        print('\nHorario $hora:');
+        print(media.toStringAsFixed(2).red);
+        print((media * 9 / 5 + 32).toStringAsFixed(2).yellow);
+        print((media + 273.15).toStringAsFixed(2).blue);
+      }
+    }
   }
 }

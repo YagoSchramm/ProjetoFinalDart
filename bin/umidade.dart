@@ -1,17 +1,219 @@
 import 'package:yaansi/yaansi.dart';
 
-import 'lib/domain/usecase/umidade.dart';
 import 'lib/infrastructure/store/leitor.dart';
 
 class UmidadeAr {
-  final UmidadeArUseCase useCase;
+  static const String colunaUmidade = 'umidade_ar_%';
 
-  UmidadeAr({required this.useCase});
+  final Leitor leitor;
+
+  UmidadeAr({required this.leitor});
+
+  Future<double> mediaPorEstadoPorAno(String siglaEstado, String ano) async {
+    final arquivos = await leitor.getByYear(siglaEstado, ano);
+    final valores = <double>[];
+
+    for (final arquivo in arquivos) {
+      if (arquivo == null) continue;
+
+      final linhas = await arquivo.readAsLines();
+      final colunas = linhas.first.trim().split(',');
+      final indiceUmidade = colunas.indexOf(colunaUmidade);
+
+      if (indiceUmidade == -1) {
+        throw Exception('Erro ao encontrar coluna $colunaUmidade');
+      }
+
+      for (var i = 1; i < linhas.length; i++) {
+        final linha = linhas[i].trim();
+        if (linha.isEmpty) continue;
+
+        final campos = linha.split(',');
+        if (campos.length > indiceUmidade) {
+          valores.add(double.parse(campos[indiceUmidade]));
+        }
+      }
+    }
+
+    if (valores.isEmpty) {
+      throw Exception('Nenhum valor de umidade do ar encontrado');
+    }
+
+    return valores.reduce((soma, valor) => soma + valor) / valores.length;
+  }
+
+  Future<double> mediaPorEstadoPorMes(
+    String siglaEstado,
+    String mes,
+    String ano,
+  ) async {
+    final arquivo = await leitor.getByMonth(siglaEstado, mes, ano);
+    if (arquivo == null) throw Exception('Erro ao filtrar arquivo');
+
+    final linhas = await arquivo.readAsLines();
+    final colunas = linhas.first.trim().split(',');
+    final indiceUmidade = colunas.indexOf(colunaUmidade);
+    final valores = <double>[];
+
+    if (indiceUmidade == -1) {
+      throw Exception('Erro ao encontrar coluna $colunaUmidade');
+    }
+
+    for (var i = 1; i < linhas.length; i++) {
+      final linha = linhas[i].trim();
+      if (linha.isEmpty) continue;
+
+      final campos = linha.split(',');
+      if (campos.length > indiceUmidade) {
+        valores.add(double.parse(campos[indiceUmidade]));
+      }
+    }
+
+    if (valores.isEmpty) {
+      throw Exception('Nenhum valor de umidade do ar encontrado');
+    }
+
+    return valores.reduce((soma, valor) => soma + valor) / valores.length;
+  }
+
+  Future<double> maximaPorEstadoPorAno(String siglaEstado, String ano) async {
+    final arquivos = await leitor.getByYear(siglaEstado, ano);
+    final valores = <double>[];
+
+    for (final arquivo in arquivos) {
+      if (arquivo == null) continue;
+
+      final linhas = await arquivo.readAsLines();
+      final colunas = linhas.first.trim().split(',');
+      final indiceUmidade = colunas.indexOf(colunaUmidade);
+
+      if (indiceUmidade == -1) {
+        throw Exception('Erro ao encontrar coluna $colunaUmidade');
+      }
+
+      for (var i = 1; i < linhas.length; i++) {
+        final linha = linhas[i].trim();
+        if (linha.isEmpty) continue;
+
+        final campos = linha.split(',');
+        if (campos.length > indiceUmidade) {
+          valores.add(double.parse(campos[indiceUmidade]));
+        }
+      }
+    }
+
+    if (valores.isEmpty) {
+      throw Exception('Nenhum valor de umidade do ar encontrado');
+    }
+
+    return valores.reduce((maior, valor) => valor > maior ? valor : maior);
+  }
+
+  Future<double> maximaPorEstadoPorMes(
+    String siglaEstado,
+    String mes,
+    String ano,
+  ) async {
+    final arquivo = await leitor.getByMonth(siglaEstado, mes, ano);
+    if (arquivo == null) throw Exception('Erro ao filtrar arquivo');
+
+    final linhas = await arquivo.readAsLines();
+    final colunas = linhas.first.trim().split(',');
+    final indiceUmidade = colunas.indexOf(colunaUmidade);
+    final valores = <double>[];
+
+    if (indiceUmidade == -1) {
+      throw Exception('Erro ao encontrar coluna $colunaUmidade');
+    }
+
+    for (var i = 1; i < linhas.length; i++) {
+      final linha = linhas[i].trim();
+      if (linha.isEmpty) continue;
+
+      final campos = linha.split(',');
+      if (campos.length > indiceUmidade) {
+        valores.add(double.parse(campos[indiceUmidade]));
+      }
+    }
+
+    if (valores.isEmpty) {
+      throw Exception('Nenhum valor de umidade do ar encontrado');
+    }
+
+    return valores.reduce((maior, valor) => valor > maior ? valor : maior);
+  }
+
+  Future<double> minimaPorEstadoPorAno(String siglaEstado, String ano) async {
+    final arquivos = await leitor.getByYear(siglaEstado, ano);
+    final valores = <double>[];
+
+    for (final arquivo in arquivos) {
+      if (arquivo == null) continue;
+
+      final linhas = await arquivo.readAsLines();
+      final colunas = linhas.first.trim().split(',');
+      final indiceUmidade = colunas.indexOf(colunaUmidade);
+
+      if (indiceUmidade == -1) {
+        throw Exception('Erro ao encontrar coluna $colunaUmidade');
+      }
+
+      for (var i = 1; i < linhas.length; i++) {
+        final linha = linhas[i].trim();
+        if (linha.isEmpty) continue;
+
+        final campos = linha.split(',');
+        if (campos.length > indiceUmidade) {
+          valores.add(double.parse(campos[indiceUmidade]));
+        }
+      }
+    }
+
+    if (valores.isEmpty) {
+      throw Exception('Nenhum valor de umidade do ar encontrado');
+    }
+
+    return valores.reduce((menor, valor) => valor < menor ? valor : menor);
+  }
+
+  Future<double> minimaPorEstadoPorMes(
+    String siglaEstado,
+    String mes,
+    String ano,
+  ) async {
+    final arquivo = await leitor.getByMonth(siglaEstado, mes, ano);
+    if (arquivo == null) throw Exception('Erro ao filtrar arquivo');
+
+    final linhas = await arquivo.readAsLines();
+    final colunas = linhas.first.trim().split(',');
+    final indiceUmidade = colunas.indexOf(colunaUmidade);
+    final valores = <double>[];
+
+    if (indiceUmidade == -1) {
+      throw Exception('Erro ao encontrar coluna $colunaUmidade');
+    }
+
+    for (var i = 1; i < linhas.length; i++) {
+      final linha = linhas[i].trim();
+      if (linha.isEmpty) continue;
+
+      final campos = linha.split(',');
+      if (campos.length > indiceUmidade) {
+        valores.add(double.parse(campos[indiceUmidade]));
+      }
+    }
+
+    if (valores.isEmpty) {
+      throw Exception('Nenhum valor de umidade do ar encontrado');
+    }
+
+    return valores.reduce((menor, valor) => valor < menor ? valor : menor);
+  }
 
   Future<void> informacoesMediaAno(String siglaEstado, String ano) async {
     print("\nMedia de umidade do ar no estado $siglaEstado no ano $ano:");
-    final media = await useCase.mediaPorEstadoPorAno(siglaEstado, ano);
-     print("${media.toStringAsFixed(2)}%".green);
+    final media = await mediaPorEstadoPorAno(siglaEstado, ano);
+    print("${media.toStringAsFixed(2)}%".green);
   }
 
   Future<void> informacoesMediaMesAno(String ano, String siglaEstado) async {
@@ -20,15 +222,15 @@ class UmidadeAr {
       print(
         "\nMedia de umidade do ar no estado $siglaEstado do mes $mes de $ano:",
       );
-      final media = await useCase.mediaPorEstadoPorMes(siglaEstado, mes, ano);
-       print("${media.toStringAsFixed(2)}%".green);
+      final media = await mediaPorEstadoPorMes(siglaEstado, mes, ano);
+      print("${media.toStringAsFixed(2)}%".green);
     }
   }
 
   Future<void> informacoesMinimaAno(String siglaEstado, String ano) async {
     print("\nMinima de umidade do ar no estado $siglaEstado no ano $ano:");
-    final minima = await useCase.minimaPorEstadoPorAno(siglaEstado, ano);
-     print("${minima.toStringAsFixed(2)}%".blue);
+    final minima = await minimaPorEstadoPorAno(siglaEstado, ano);
+    print("${minima.toStringAsFixed(2)}%".blue);
   }
 
   Future<void> informacoesMinimaMesAno(String ano, String siglaEstado) async {
@@ -37,15 +239,15 @@ class UmidadeAr {
       print(
         "\nMinima de umidade do ar no estado $siglaEstado do mes $mes de $ano:",
       );
-      final minima = await useCase.minimaPorEstadoPorMes(siglaEstado, mes, ano);
-       print("${minima.toStringAsFixed(2)}%".blue);
+      final minima = await minimaPorEstadoPorMes(siglaEstado, mes, ano);
+      print("${minima.toStringAsFixed(2)}%".blue);
     }
   }
 
   Future<void> informacoesMaximaAno(String siglaEstado, String ano) async {
     print("\nMaxima de umidade do ar no estado $siglaEstado no ano $ano:");
-    final maxima = await useCase.maximaPorEstadoPorAno(siglaEstado, ano);
-     print("${maxima.toStringAsFixed(2)}%".red);
+    final maxima = await maximaPorEstadoPorAno(siglaEstado, ano);
+    print("${maxima.toStringAsFixed(2)}%".red);
   }
 
   Future<void> informacoesMaximaMesAno(String ano, String siglaEstado) async {
@@ -54,8 +256,8 @@ class UmidadeAr {
       print(
         "\nMaxima de umidade do ar no estado $siglaEstado do mes $mes de $ano:",
       );
-      final maxima = await useCase.maximaPorEstadoPorMes(siglaEstado, mes, ano);
-       print("${maxima.toStringAsFixed(2)}%".red);
+      final maxima = await maximaPorEstadoPorMes(siglaEstado, mes, ano);
+      print("${maxima.toStringAsFixed(2)}%".red);
     }
   }
 
