@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:yaansi/yaansi.dart';
 
@@ -318,9 +319,7 @@ class Temperatura {
 
       for (final mes in meses) {
         final media = await mediaPorEstadoPorMes(estado, mes, ano);
-        print(
-          '\nMedia de temperatura do estado $estado no mes $mes de $ano:',
-        );
+        print('\nMedia de temperatura do estado $estado no mes $mes de $ano:');
         print(media.toStringAsFixed(2).red);
         print((media * 9 / 5 + 32).toStringAsFixed(2).yellow);
         print((media + 273.15).toStringAsFixed(2).blue);
@@ -340,9 +339,7 @@ class Temperatura {
 
       for (final mes in meses) {
         final maxima = await maximaPorEstadoPorMes(estado, mes, ano);
-        print(
-          '\nMaxima de temperatura do estado $estado no mes $mes de $ano:',
-        );
+        print('\nMaxima de temperatura do estado $estado no mes $mes de $ano:');
         print(maxima.toStringAsFixed(2).red);
         print((maxima * 9 / 5 + 32).toStringAsFixed(2).yellow);
         print((maxima + 273.15).toStringAsFixed(2).blue);
@@ -362,9 +359,7 @@ class Temperatura {
 
       for (final mes in meses) {
         final minima = await minimaPorEstadoPorMes(estado, mes, ano);
-        print(
-          '\nMinima de temperatura do estado $estado no mes $mes de $ano:',
-        );
+        print('\nMinima de temperatura do estado $estado no mes $mes de $ano:');
         print(minima.toStringAsFixed(2).red);
         print((minima * 9 / 5 + 32).toStringAsFixed(2).yellow);
         print((minima + 273.15).toStringAsFixed(2).blue);
@@ -376,11 +371,137 @@ class Temperatura {
       for (var i = 1; i <= 24; i++) {
         final hora = i.toString();
         final media = await mediaPorHorarioPorEstado(estado, hora);
-        print('\nHorario ${hora.padLeft(2,"0")}:00:00 :');
+        print('\nHorario ${hora.padLeft(2, "0")}:00:00 :');
         print(media.toStringAsFixed(2).red);
         print((media * 9 / 5 + 32).toStringAsFixed(2).yellow);
         print((media + 273.15).toStringAsFixed(2).blue);
       }
     }
+    print(
+      "\n Você quer gerar um relatório do conteúdo apresentado (1-sim,2-não)?",
+    );
+    int? opcao = int.tryParse(stdin.readLineSync()!);
+    if(opcao==null){
+    throw Exception("Erro ao codificar opção");
+    }
+    switch (opcao) {
+      case 1:
+       await gerarArquivo();
+        print("Fim da execução");
+        break;
+      default:
+        print("Fim da execução");
+        break;
+    }
+  }
+
+  Future<void> gerarArquivo() async {
+    final estados = ['SC', 'SP'];
+    const ano = '2024';
+
+    final buffer = StringBuffer();
+
+    for (final estado in estados) {
+      final media = await mediaPorEstadoPorAno(estado, ano);
+
+      buffer.writeln('Media de temperatura do estado $estado no ano $ano:');
+      buffer.writeln('Celsius: ${media.toStringAsFixed(2)}');
+      buffer.writeln('Fahrenheit: ${(media * 9 / 5 + 32).toStringAsFixed(2)}');
+      buffer.writeln('Kelvin: ${(media + 273.15).toStringAsFixed(2)}');
+      buffer.writeln();
+    }
+    for (final estado in estados) {
+      final meses = await leitor.getMonthsByYear(estado, ano);
+
+      for (final mes in meses) {
+        final media = await mediaPorEstadoPorMes(estado, mes, ano);
+        buffer.writeln(
+          '\nMedia de temperatura do estado $estado no mes $mes de $ano:',
+        );
+        buffer.writeln('Celsius: ${media.toStringAsFixed(2)}');
+        buffer.writeln(
+          'Fahrenheit: ${(media * 9 / 5 + 32).toStringAsFixed(2)}',
+        );
+        buffer.writeln('Kelvin: ${(media + 273.15).toStringAsFixed(2)}');
+        buffer.writeln();
+      }
+    }
+
+    for (final estado in estados) {
+      final maxima = await maximaPorEstadoPorAno(estado, ano);
+      buffer.writeln('\nMaxima de temperatura do estado $estado no ano $ano:');
+      buffer.writeln('Celsius: ${maxima.toStringAsFixed(2)}');
+      buffer.writeln('Fahrenheit: ${(maxima * 9 / 5 + 32).toStringAsFixed(2)}');
+      buffer.writeln('Kelvin: ${(maxima + 273.15).toStringAsFixed(2)}');
+      buffer.writeln();
+    }
+
+    for (final estado in estados) {
+      final meses = await leitor.getMonthsByYear(estado, ano);
+
+      for (final mes in meses) {
+        final maxima = await maximaPorEstadoPorMes(estado, mes, ano);
+        buffer.writeln(
+          '\nMaxima de temperatura do estado $estado no mes $mes de $ano:',
+        );
+        buffer.writeln('Celsius: ${maxima.toStringAsFixed(2)}');
+        buffer.writeln(
+          'Fahrenheit: ${(maxima * 9 / 5 + 32).toStringAsFixed(2)}',
+        );
+        buffer.writeln('Kelvin: ${(maxima + 273.15).toStringAsFixed(2)}');
+        buffer.writeln();
+      }
+    }
+
+    for (final estado in estados) {
+      final minima = await minimaPorEstadoPorAno(estado, ano);
+      buffer.writeln('\nMinima de temperatura do estado $estado no ano $ano:');
+      buffer.writeln('Celsius: ${minima.toStringAsFixed(2)}');
+      buffer.writeln('Fahrenheit: ${(minima * 9 / 5 + 32).toStringAsFixed(2)}');
+      buffer.writeln('Kelvin: ${(minima + 273.15).toStringAsFixed(2)}');
+      buffer.writeln();
+    }
+
+    for (final estado in estados) {
+      final meses = await leitor.getMonthsByYear(estado, ano);
+
+      for (final mes in meses) {
+        final minima = await minimaPorEstadoPorMes(estado, mes, ano);
+        buffer.writeln(
+          '\nMinima de temperatura do estado $estado no mes $mes de $ano:',
+        );
+        buffer.writeln('Celsius: ${minima.toStringAsFixed(2)}');
+        buffer.writeln(
+          'Fahrenheit: ${(minima * 9 / 5 + 32).toStringAsFixed(2)}',
+        );
+        buffer.writeln('Kelvin: ${(minima + 273.15).toStringAsFixed(2)}');
+        buffer.writeln();
+      }
+    }
+
+    for (final estado in estados) {
+      buffer.writeln('\nMedia de temperatura do estado $estado por hora:');
+      for (var i = 1; i <= 24; i++) {
+        final hora = i.toString();
+        final media = await mediaPorHorarioPorEstado(estado, hora);
+        buffer.writeln('\nHorario ${hora.padLeft(2, "0")}:00:00 :');
+        buffer.writeln('Celsius: ${media.toStringAsFixed(2)}');
+        buffer.writeln(
+          'Fahrenheit: ${(media * 9 / 5 + 32).toStringAsFixed(2)}',
+        );
+        buffer.writeln('Kelvin: ${(media + 273.15).toStringAsFixed(2)}');
+        buffer.writeln();
+      }
+    }
+    final pasta = Directory('relatorios');
+    if (!await pasta.exists()) {
+      await pasta.create();
+    }
+    final dataEHora = DateTime.now();
+    final data = "${dataEHora.year}-${dataEHora.month}-${dataEHora.day}";
+    final hora = "${dataEHora.hour}-${dataEHora.minute}";
+    final arquivo = File('relatorios/TEMPERATURA_${data}_$hora.txt');
+    await arquivo.writeAsString(buffer.toString());
+    print("Arquivo salvo com sucesso em: ${arquivo.path}");
   }
 }
