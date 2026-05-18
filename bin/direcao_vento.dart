@@ -74,7 +74,7 @@ class DirecaoVento {
     String mes,
     String ano,
   ) async {
-    final arquivo = await leitor.getByMonth(siglaEstado, mes);
+    final arquivo = await leitor.getByMonth(siglaEstado, mes, ano);
     if (arquivo == null) throw Exception('Erro ao filtrar arquivo');
 
     final linhas = await arquivo.readAsLines(encoding: latin1);
@@ -138,8 +138,9 @@ class DirecaoVento {
     }
 
     for (final estado in estados) {
-      for (var i = 1; i <= 12; i++) {
-        final mes = i.toString();
+      final meses = await leitor.getMonthsByYear(estado, ano);
+
+      for (final mes in meses) {
         final direcao = await direcaoMaisFrequentePorEstadoPorMes(
           estado,
           mes,

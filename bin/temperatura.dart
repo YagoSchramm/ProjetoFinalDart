@@ -56,7 +56,7 @@ class Temperatura {
     String mes,
     String ano,
   ) async {
-    final arquivo = await leitor.getByMonth(siglaEstado, mes);
+    final arquivo = await leitor.getByMonth(siglaEstado, mes, ano);
     if (arquivo == null) throw Exception('Erro ao filtrar arquivo');
 
     final linhas = await arquivo.readAsLines(encoding: latin1);
@@ -137,7 +137,7 @@ class Temperatura {
     String mes,
     String ano,
   ) async {
-    final arquivo = await leitor.getByMonth(siglaEstado, mes);
+    final arquivo = await leitor.getByMonth(siglaEstado, mes, ano);
     if (arquivo == null) throw Exception('Erro ao filtrar arquivo');
 
     final linhas = await arquivo.readAsLines(encoding: latin1);
@@ -217,7 +217,7 @@ class Temperatura {
     String mes,
     String ano,
   ) async {
-    final arquivo = await leitor.getByMonth(siglaEstado, mes);
+    final arquivo = await leitor.getByMonth(siglaEstado, mes, ano);
     if (arquivo == null) throw Exception('Erro ao filtrar arquivo');
 
     final linhas = await arquivo.readAsLines(encoding: latin1);
@@ -314,8 +314,9 @@ class Temperatura {
     }
 
     for (final estado in estados) {
-      for (var i = 1; i <= 12; i++) {
-        final mes = i.toString();
+      final meses = await leitor.getMonthsByYear(estado, ano);
+
+      for (final mes in meses) {
         final media = await mediaPorEstadoPorMes(estado, mes, ano);
         print(
           '\nMedia de temperatura do estado $estado no mes $mes de $ano:',
@@ -335,8 +336,9 @@ class Temperatura {
     }
 
     for (final estado in estados) {
-      for (var i = 1; i <= 12; i++) {
-        final mes = i.toString();
+      final meses = await leitor.getMonthsByYear(estado, ano);
+
+      for (final mes in meses) {
         final maxima = await maximaPorEstadoPorMes(estado, mes, ano);
         print(
           '\nMaxima de temperatura do estado $estado no mes $mes de $ano:',
@@ -356,8 +358,9 @@ class Temperatura {
     }
 
     for (final estado in estados) {
-      for (var i = 1; i <= 12; i++) {
-        final mes = i.toString();
+      final meses = await leitor.getMonthsByYear(estado, ano);
+
+      for (final mes in meses) {
         final minima = await minimaPorEstadoPorMes(estado, mes, ano);
         print(
           '\nMinima de temperatura do estado $estado no mes $mes de $ano:',
