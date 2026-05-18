@@ -17,16 +17,22 @@ void main(List<String> arguments) async {
   print(" 3 - DIRECAO DO VENTO");
   print("DIGITE O NUMERO DA OPCAO DESEJADA:");
 
-  int? opcao = int.tryParse(stdin.readLineSync()!);
-  switch (opcao) {
-    case 1:
-      await temp.informacoes();
-      break;
-    case 2:
-      await umidadeAr.informacoes();
-      break;
-    case 3:
-      await direcaoVento.informacoes();
-      break;
+  try {
+    int? opcao = int.tryParse(stdin.readLineSync()!);
+    switch (opcao) {
+      case 1:
+        await temp.informacoes();
+        break;
+      case 2:
+        await umidadeAr.informacoes();
+        break;
+      case 3:
+        await direcaoVento.informacoes();
+        break;
+      default:
+        print("Opcao invalida");
+    }
+  } catch (erro) {
+    print("Erro: $erro");
   }
 }
