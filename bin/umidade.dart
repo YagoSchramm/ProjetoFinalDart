@@ -55,7 +55,7 @@ class UmidadeAr {
     String mes,
     String ano,
   ) async {
-    final arquivo = await leitor.getByMonth(siglaEstado, mes);
+    final arquivo = await leitor.getByMonth(siglaEstado, mes, ano);
     if (arquivo == null) throw Exception('Erro ao filtrar arquivo');
 
     final linhas = await arquivo.readAsLines(encoding: latin1);
@@ -144,7 +144,7 @@ class UmidadeAr {
     String mes,
     String ano,
   ) async {
-    final arquivo = await leitor.getByMonth(siglaEstado, mes);
+    final arquivo = await leitor.getByMonth(siglaEstado, mes, ano);
     if (arquivo == null) throw Exception('Erro ao filtrar arquivo');
 
     final linhas = await arquivo.readAsLines(encoding: latin1);
@@ -224,7 +224,7 @@ class UmidadeAr {
     String mes,
     String ano,
   ) async {
-    final arquivo = await leitor.getByMonth(siglaEstado, mes);
+    final arquivo = await leitor.getByMonth(siglaEstado, mes, ano);
     if (arquivo == null) throw Exception('Erro ao filtrar arquivo');
 
     final linhas = await arquivo.readAsLines(encoding: latin1);
@@ -267,8 +267,9 @@ class UmidadeAr {
   }
 
   Future<void> informacoesMediaMesAno(String ano, String siglaEstado) async {
-    for (var i = 1; i <= 12; i++) {
-      final mes = i.toString();
+    final meses = await leitor.getMonthsByYear(siglaEstado, ano);
+
+    for (final mes in meses) {
       print(
         "\nMedia de umidade do ar no estado $siglaEstado do mes $mes de $ano:",
       );
@@ -285,8 +286,9 @@ class UmidadeAr {
   }
 
   Future<void> informacoesMinimaMesAno(String ano, String siglaEstado) async {
-    for (var i = 1; i <= 12; i++) {
-      final mes = i.toString();
+    final meses = await leitor.getMonthsByYear(siglaEstado, ano);
+
+    for (final mes in meses) {
       print(
         "\nMinima de umidade do ar no estado $siglaEstado do mes $mes de $ano:",
       );
@@ -302,8 +304,9 @@ class UmidadeAr {
   }
 
   Future<void> informacoesMaximaMesAno(String ano, String siglaEstado) async {
-    for (var i = 1; i <= 12; i++) {
-      final mes = i.toString();
+    final meses = await leitor.getMonthsByYear(siglaEstado, ano);
+
+    for (final mes in meses) {
       print(
         "\nMaxima de umidade do ar no estado $siglaEstado do mes $mes de $ano:",
       );
