@@ -378,7 +378,7 @@ class Temperatura {
       }
     }
     print(
-      "\n Você quer gerar um relatório do conteúdo apresentado (1-sim,2-não)?",
+      "\nVocê quer gerar um relatório do conteúdo apresentado (1-sim,2-não)?",
     );
     int? opcao = int.tryParse(stdin.readLineSync()!);
     if(opcao==null){

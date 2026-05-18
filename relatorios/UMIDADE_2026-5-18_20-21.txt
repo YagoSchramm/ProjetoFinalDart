@@ -1,0 +1,234 @@
+
+Media de umidade do ar no estado SC no ano 2024:
+0.013192 kg/kg
+
+Media de umidade do ar no estado SP no ano 2024:
+0.012092 kg/kg
+
+Media de umidade do ar no estado SC do mes 1 de 2024:
+0.017287 kg/kg
+
+Media de umidade do ar no estado SC do mes 2 de 2024:
+0.016789 kg/kg
+
+Media de umidade do ar no estado SC do mes 3 de 2024:
+0.016404 kg/kg
+
+Media de umidade do ar no estado SC do mes 4 de 2024:
+0.013470 kg/kg
+
+Media de umidade do ar no estado SC do mes 5 de 2024:
+0.011196 kg/kg
+
+Media de umidade do ar no estado SC do mes 6 de 2024:
+0.010138 kg/kg
+
+Media de umidade do ar no estado SC do mes 7 de 2024:
+0.010627 kg/kg
+
+Media de umidade do ar no estado SC do mes 8 de 2024:
+0.010339 kg/kg
+
+Media de umidade do ar no estado SC do mes 9 de 2024:
+0.012221 kg/kg
+
+Media de umidade do ar no estado SC do mes 10 de 2024:
+0.012325 kg/kg
+
+Media de umidade do ar no estado SC do mes 11 de 2024:
+0.013514 kg/kg
+
+Media de umidade do ar no estado SC do mes 12 de 2024:
+0.014233 kg/kg
+
+Media de umidade do ar no estado SP do mes 1 de 2024:
+0.014660 kg/kg
+
+Media de umidade do ar no estado SP do mes 2 de 2024:
+0.015329 kg/kg
+
+Media de umidade do ar no estado SP do mes 3 de 2024:
+0.014722 kg/kg
+
+Media de umidade do ar no estado SP do mes 4 de 2024:
+0.012195 kg/kg
+
+Media de umidade do ar no estado SP do mes 5 de 2024:
+0.011447 kg/kg
+
+Media de umidade do ar no estado SP do mes 6 de 2024:
+0.010892 kg/kg
+
+Media de umidade do ar no estado SP do mes 7 de 2024:
+0.009663 kg/kg
+
+Media de umidade do ar no estado SP do mes 8 de 2024:
+0.009152 kg/kg
+
+Media de umidade do ar no estado SP do mes 9 de 2024:
+0.010984 kg/kg
+
+Media de umidade do ar no estado SP do mes 10 de 2024:
+0.011774 kg/kg
+
+Media de umidade do ar no estado SP do mes 11 de 2024:
+0.011994 kg/kg
+
+Media de umidade do ar no estado SP do mes 12 de 2024:
+0.012531 kg/kg
+
+Maxima de umidade do ar no estado SC no ano 2024:
+0.029118 kg/kg
+
+Maxima de umidade do ar no estado SP no ano 2024:
+0.021130 kg/kg
+
+Maxima de umidade do ar no estado SC do mes 1 de 2024:
+0.029118 kg/kg
+
+Maxima de umidade do ar no estado SC do mes 2 de 2024:
+0.022406 kg/kg
+
+Maxima de umidade do ar no estado SC do mes 3 de 2024:
+0.022342 kg/kg
+
+Maxima de umidade do ar no estado SC do mes 4 de 2024:
+0.019485 kg/kg
+
+Maxima de umidade do ar no estado SC do mes 5 de 2024:
+0.016397 kg/kg
+
+Maxima de umidade do ar no estado SC do mes 6 de 2024:
+0.017481 kg/kg
+
+Maxima de umidade do ar no estado SC do mes 7 de 2024:
+0.014328 kg/kg
+
+Maxima de umidade do ar no estado SC do mes 8 de 2024:
+0.014591 kg/kg
+
+Maxima de umidade do ar no estado SC do mes 9 de 2024:
+0.015630 kg/kg
+
+Maxima de umidade do ar no estado SC do mes 10 de 2024:
+0.018304 kg/kg
+
+Maxima de umidade do ar no estado SC do mes 11 de 2024:
+0.020529 kg/kg
+
+Maxima de umidade do ar no estado SC do mes 12 de 2024:
+0.021358 kg/kg
+
+Maxima de umidade do ar no estado SP do mes 1 de 2024:
+0.020419 kg/kg
+
+Maxima de umidade do ar no estado SP do mes 2 de 2024:
+0.021130 kg/kg
+
+Maxima de umidade do ar no estado SP do mes 3 de 2024:
+0.019912 kg/kg
+
+Maxima de umidade do ar no estado SP do mes 4 de 2024:
+0.016453 kg/kg
+
+Maxima de umidade do ar no estado SP do mes 5 de 2024:
+0.015868 kg/kg
+
+Maxima de umidade do ar no estado SP do mes 6 de 2024:
+0.014797 kg/kg
+
+Maxima de umidade do ar no estado SP do mes 7 de 2024:
+0.012643 kg/kg
+
+Maxima de umidade do ar no estado SP do mes 8 de 2024:
+0.013508 kg/kg
+
+Maxima de umidade do ar no estado SP do mes 9 de 2024:
+0.014273 kg/kg
+
+Maxima de umidade do ar no estado SP do mes 10 de 2024:
+0.016295 kg/kg
+
+Maxima de umidade do ar no estado SP do mes 11 de 2024:
+0.015579 kg/kg
+
+Maxima de umidade do ar no estado SP do mes 12 de 2024:
+0.019894 kg/kg
+
+Minima de umidade do ar no estado SC no ano 2024:
+0.003286 kg/kg
+
+Minima de umidade do ar no estado SP no ano 2024:
+0.004874 kg/kg
+
+Minima de umidade do ar no estado SC do mes 1 de 2024:
+0.012090 kg/kg
+
+Minima de umidade do ar no estado SC do mes 2 de 2024:
+0.010169 kg/kg
+
+Minima de umidade do ar no estado SC do mes 3 de 2024:
+0.009972 kg/kg
+
+Minima de umidade do ar no estado SC do mes 4 de 2024:
+0.007977 kg/kg
+
+Minima de umidade do ar no estado SC do mes 5 de 2024:
+0.005602 kg/kg
+
+Minima de umidade do ar no estado SC do mes 6 de 2024:
+0.004268 kg/kg
+
+Minima de umidade do ar no estado SC do mes 7 de 2024:
+0.004677 kg/kg
+
+Minima de umidade do ar no estado SC do mes 8 de 2024:
+0.003286 kg/kg
+
+Minima de umidade do ar no estado SC do mes 9 de 2024:
+0.007377 kg/kg
+
+Minima de umidade do ar no estado SC do mes 10 de 2024:
+0.005919 kg/kg
+
+Minima de umidade do ar no estado SC do mes 11 de 2024:
+0.007220 kg/kg
+
+Minima de umidade do ar no estado SC do mes 12 de 2024:
+0.008823 kg/kg
+
+Minima de umidade do ar no estado SP do mes 1 de 2024:
+0.009268 kg/kg
+
+Minima de umidade do ar no estado SP do mes 2 de 2024:
+0.011284 kg/kg
+
+Minima de umidade do ar no estado SP do mes 3 de 2024:
+0.011043 kg/kg
+
+Minima de umidade do ar no estado SP do mes 4 de 2024:
+0.008731 kg/kg
+
+Minima de umidade do ar no estado SP do mes 5 de 2024:
+0.007884 kg/kg
+
+Minima de umidade do ar no estado SP do mes 6 de 2024:
+0.005600 kg/kg
+
+Minima de umidade do ar no estado SP do mes 7 de 2024:
+0.007126 kg/kg
+
+Minima de umidade do ar no estado SP do mes 8 de 2024:
+0.004874 kg/kg
+
+Minima de umidade do ar no estado SP do mes 9 de 2024:
+0.006798 kg/kg
+
+Minima de umidade do ar no estado SP do mes 10 de 2024:
+0.007271 kg/kg
+
+Minima de umidade do ar no estado SP do mes 11 de 2024:
+0.006328 kg/kg
+
+Minima de umidade do ar no estado SP do mes 12 de 2024:
+0.006539 kg/kg
